@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		9AF5A6F91AD39AA200CEC57F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */; };
-		9AF5A6FB1AD39AA200CEC57F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A6FA1AD39AA200CEC57F /* FirstViewController.swift */; };
-		9AF5A6FD1AD39AA200CEC57F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A6FC1AD39AA200CEC57F /* SecondViewController.swift */; };
 		9AF5A7001AD39AA200CEC57F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5A6FE1AD39AA200CEC57F /* Main.storyboard */; };
 		9AF5A7021AD39AA200CEC57F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5A7011AD39AA200CEC57F /* Images.xcassets */; };
 		9AF5A7051AD39AA200CEC57F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5A7031AD39AA200CEC57F /* LaunchScreen.xib */; };
 		9AF5A7111AD39AA200CEC57F /* GigSalmonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A7101AD39AA200CEC57F /* GigSalmonTests.swift */; };
+		9AF5A71B1AD39D5A00CEC57F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF5A71A1AD39D5A00CEC57F /* MapKit.framework */; };
+		9AF5A71E1AD39E1F00CEC57F /* GSMusicianTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A71D1AD39E1F00CEC57F /* GSMusicianTop.swift */; };
+		9AF5A7201AD39E3600CEC57F /* GSEventTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A71F1AD39E3600CEC57F /* GSEventTop.swift */; };
+		9AF5A7221AD39E4C00CEC57F /* GSVenueTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A7211AD39E4C00CEC57F /* GSVenueTop.swift */; };
+		9AF5A7241AD39E7100CEC57F /* GSMenuTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A7231AD39E7100CEC57F /* GSMenuTop.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,14 +33,17 @@
 		9AF5A6F31AD39AA200CEC57F /* GigSalmon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GigSalmon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF5A6F71AD39AA200CEC57F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9AF5A6FA1AD39AA200CEC57F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		9AF5A6FC1AD39AA200CEC57F /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		9AF5A6FF1AD39AA200CEC57F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9AF5A7011AD39AA200CEC57F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9AF5A7041AD39AA200CEC57F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		9AF5A70A1AD39AA200CEC57F /* GigSalmonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GigSalmonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF5A70F1AD39AA200CEC57F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AF5A7101AD39AA200CEC57F /* GigSalmonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GigSalmonTests.swift; sourceTree = "<group>"; };
+		9AF5A71A1AD39D5A00CEC57F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9AF5A71D1AD39E1F00CEC57F /* GSMusicianTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMusicianTop.swift; sourceTree = "<group>"; };
+		9AF5A71F1AD39E3600CEC57F /* GSEventTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSEventTop.swift; sourceTree = "<group>"; };
+		9AF5A7211AD39E4C00CEC57F /* GSVenueTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSVenueTop.swift; sourceTree = "<group>"; };
+		9AF5A7231AD39E7100CEC57F /* GSMenuTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMenuTop.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AF5A71B1AD39D5A00CEC57F /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +71,7 @@
 				9AF5A6F51AD39AA200CEC57F /* GigSalmon */,
 				9AF5A70D1AD39AA200CEC57F /* GigSalmonTests */,
 				9AF5A6F41AD39AA200CEC57F /* Products */,
+				9AF5A71C1AD39D5F00CEC57F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,9 +88,11 @@
 			isa = PBXGroup;
 			children = (
 				9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */,
-				9AF5A6FA1AD39AA200CEC57F /* FirstViewController.swift */,
-				9AF5A6FC1AD39AA200CEC57F /* SecondViewController.swift */,
 				9AF5A6FE1AD39AA200CEC57F /* Main.storyboard */,
+				9AF5A71D1AD39E1F00CEC57F /* GSMusicianTop.swift */,
+				9AF5A71F1AD39E3600CEC57F /* GSEventTop.swift */,
+				9AF5A7211AD39E4C00CEC57F /* GSVenueTop.swift */,
+				9AF5A7231AD39E7100CEC57F /* GSMenuTop.swift */,
 				9AF5A7011AD39AA200CEC57F /* Images.xcassets */,
 				9AF5A7031AD39AA200CEC57F /* LaunchScreen.xib */,
 				9AF5A6F61AD39AA200CEC57F /* Supporting Files */,
@@ -113,6 +123,14 @@
 				9AF5A70F1AD39AA200CEC57F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9AF5A71C1AD39D5F00CEC57F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AF5A71A1AD39D5A00CEC57F /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +177,7 @@
 		9AF5A6EB1AD39AA200CEC57F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = GS;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = tnk;
 				TargetAttributes = {
@@ -215,9 +234,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AF5A6FD1AD39AA200CEC57F /* SecondViewController.swift in Sources */,
+				9AF5A71E1AD39E1F00CEC57F /* GSMusicianTop.swift in Sources */,
+				9AF5A7201AD39E3600CEC57F /* GSEventTop.swift in Sources */,
+				9AF5A7221AD39E4C00CEC57F /* GSVenueTop.swift in Sources */,
 				9AF5A6F91AD39AA200CEC57F /* AppDelegate.swift in Sources */,
-				9AF5A6FB1AD39AA200CEC57F /* FirstViewController.swift in Sources */,
+				9AF5A7241AD39E7100CEC57F /* GSMenuTop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
