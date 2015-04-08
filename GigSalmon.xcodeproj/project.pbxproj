@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9AB3CD901AD4D2570082D2AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */; };
+		9AB3CD981AD4F9700082D2AB /* GoogleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3CD961AD4F9700082D2AB /* GoogleIcon.swift */; };
+		9AB3CD991AD4F9700082D2AB /* googleicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AB3CD971AD4F9700082D2AB /* googleicon.ttf */; };
 		9AF5A6F91AD39AA200CEC57F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */; };
 		9AF5A7001AD39AA200CEC57F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5A6FE1AD39AA200CEC57F /* Main.storyboard */; };
 		9AF5A7021AD39AA200CEC57F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5A7011AD39AA200CEC57F /* Images.xcassets */; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9AB3CD961AD4F9700082D2AB /* GoogleIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleIcon.swift; sourceTree = "<group>"; };
+		9AB3CD971AD4F9700082D2AB /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = googleicon.ttf; sourceTree = "<group>"; };
 		9AF5A6F31AD39AA200CEC57F /* GigSalmon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GigSalmon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF5A6F71AD39AA200CEC57F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,9 +72,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9AB3CD951AD4F9700082D2AB /* GoogleMaterialDesignIcons */ = {
+			isa = PBXGroup;
+			children = (
+				9AB3CD961AD4F9700082D2AB /* GoogleIcon.swift */,
+				9AB3CD971AD4F9700082D2AB /* googleicon.ttf */,
+			);
+			path = GoogleMaterialDesignIcons;
+			sourceTree = "<group>";
+		};
 		9AF5A6EA1AD39AA200CEC57F = {
 			isa = PBXGroup;
 			children = (
+				9AB3CD951AD4F9700082D2AB /* GoogleMaterialDesignIcons */,
 				9AF5A6F51AD39AA200CEC57F /* GigSalmon */,
 				9AF5A70D1AD39AA200CEC57F /* GigSalmonTests */,
 				9AF5A6F41AD39AA200CEC57F /* Products */,
@@ -90,8 +104,8 @@
 		9AF5A6F51AD39AA200CEC57F /* GigSalmon */ = {
 			isa = PBXGroup;
 			children = (
-				9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */,
 				9AF5A6FE1AD39AA200CEC57F /* Main.storyboard */,
+				9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */,
 				9AF5A71D1AD39E1F00CEC57F /* GSMusicianTop.swift */,
 				9AF5A7211AD39E4C00CEC57F /* GSVenueTop.swift */,
 				9AF5A7231AD39E7100CEC57F /* GSMenuTop.swift */,
@@ -218,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AB3CD991AD4F9700082D2AB /* googleicon.ttf in Resources */,
 				9AF5A7001AD39AA200CEC57F /* Main.storyboard in Resources */,
 				9AF5A7051AD39AA200CEC57F /* LaunchScreen.xib in Resources */,
 				9AF5A7021AD39AA200CEC57F /* Images.xcassets in Resources */,
@@ -241,6 +256,7 @@
 				9AF5A71E1AD39E1F00CEC57F /* GSMusicianTop.swift in Sources */,
 				9AF5A7201AD39E3600CEC57F /* GSEventTop.swift in Sources */,
 				9AF5A7221AD39E4C00CEC57F /* GSVenueTop.swift in Sources */,
+				9AB3CD981AD4F9700082D2AB /* GoogleIcon.swift in Sources */,
 				9AF5A6F91AD39AA200CEC57F /* AppDelegate.swift in Sources */,
 				9AF5A7241AD39E7100CEC57F /* GSMenuTop.swift in Sources */,
 			);

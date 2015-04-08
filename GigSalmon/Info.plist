@@ -54,6 +54,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Show Your Location in Map</string>
+	<string>Indicate your location in map</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>googleicon.ttf</string>
+	</array>
 </dict>
 </plist>

@@ -16,6 +16,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		self.setupBarButtons()
+		
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		self.navigationController?.navigationBar.translucent = true
@@ -26,6 +28,40 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
+	}
+	
+	func setupBarButtons() {
+		let label = UILabel(frame: CGRectMake(0, 0, 60, 24))
+		label.textColor = UIColor.blackColor()
+		label.textAlignment = .Right
+		label.text = "100km"
+		let distanceItem = UIBarButtonItem(customView: label)
+		
+		let filterButton = UIButton(frame: CGRectMake(0, 0, 40, 40))
+		filterButton.titleLabel?.font = UIFont(name: GoogleIconName, size: 40.0)
+		filterButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+		filterButton.setTitle(GoogleIcon.e6c2, forState:.Normal)
+		filterButton.showsTouchWhenHighlighted = true
+		filterButton.addTarget(self, action: "filterAction:", forControlEvents: .TouchUpInside)
+		let filterItem = UIBarButtonItem(customView: filterButton)
+		
+		let listButton = UIButton(frame: CGRectMake(0, 0, 40, 40))
+		listButton.titleLabel?.font = UIFont(name: GoogleIconName, size: 40.0)
+		listButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+		listButton.setTitle(GoogleIcon.e683, forState: UIControlState.Normal)
+		listButton.showsTouchWhenHighlighted = true
+		listButton.addTarget(self, action: "listAction:", forControlEvents: UIControlEvents.TouchUpInside)
+		let listItem = UIBarButtonItem(customView: listButton)
+		
+		self.navigationItem.rightBarButtonItems = [listItem, filterItem, distanceItem]
+	}
+	
+	func filterAction(sender: UIBarButtonItem) {
+		println("filterAction")
+	}
+	
+	func listAction(sender: UIBarButtonItem) {
+		println("listAction")
 	}
 	
 	// MARK: CLLocationManagerDelegate
