@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9AB3CD901AD4D2570082D2AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */; };
 		9AF5A6F91AD39AA200CEC57F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */; };
 		9AF5A7001AD39AA200CEC57F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5A6FE1AD39AA200CEC57F /* Main.storyboard */; };
 		9AF5A7021AD39AA200CEC57F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5A7011AD39AA200CEC57F /* Images.xcassets */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9AF5A6F31AD39AA200CEC57F /* GigSalmon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GigSalmon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF5A6F71AD39AA200CEC57F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AB3CD901AD4D2570082D2AB /* CoreLocation.framework in Frameworks */,
 				9AF5A71B1AD39D5A00CEC57F /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,9 +93,9 @@
 				9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */,
 				9AF5A6FE1AD39AA200CEC57F /* Main.storyboard */,
 				9AF5A71D1AD39E1F00CEC57F /* GSMusicianTop.swift */,
-				9AF5A71F1AD39E3600CEC57F /* GSEventTop.swift */,
 				9AF5A7211AD39E4C00CEC57F /* GSVenueTop.swift */,
 				9AF5A7231AD39E7100CEC57F /* GSMenuTop.swift */,
+				9AF5A71F1AD39E3600CEC57F /* GSEventTop.swift */,
 				9AF5A7011AD39AA200CEC57F /* Images.xcassets */,
 				9AF5A7031AD39AA200CEC57F /* LaunchScreen.xib */,
 				9AF5A6F61AD39AA200CEC57F /* Supporting Files */,
@@ -128,6 +131,7 @@
 		9AF5A71C1AD39D5F00CEC57F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */,
 				9AF5A71A1AD39D5A00CEC57F /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -432,6 +436,7 @@
 				9AF5A7161AD39AA200CEC57F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9AF5A7171AD39AA200CEC57F /* Build configuration list for PBXNativeTarget "GigSalmonTests" */ = {
 			isa = XCConfigurationList;
@@ -440,6 +445,7 @@
 				9AF5A7191AD39AA200CEC57F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

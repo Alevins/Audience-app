@@ -7,21 +7,55 @@
 //
 
 import UIKit
+import CoreLocation
 
-class GSEventTop: UIViewController {
+class GSEventTop: UIViewController, CLLocationManagerDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	var locationManager = CLLocationManager()
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
+		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+		self.navigationController?.navigationBar.shadowImage = UIImage()
+		self.navigationController?.navigationBar.translucent = true
+		
+		locationManager.delegate = self
+		locationManager.requestWhenInUseAuthorization()
+	}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+	}
+	
+	// MARK: CLLocationManagerDelegate
+	
+	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+		switch status {
+		case .NotDetermined:
+			locationManager.requestWhenInUseAuthorization()
+		case .Restricted, .Denied:
+			self.alertLocationServicesDisabled()
+			break
+		case .AuthorizedAlways, .AuthorizedWhenInUse:
+			break
+		default:
+			break
+		}
+	}
 
+	func alertLocationServicesDisabled() {
+		let title = "Location Services Disabled"
+		let message = "You must enable Location Services to show your location."
+		let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+		alert.addAction(UIAlertAction(title: "Settings", style: .Default, handler: { action in
+			let url = NSURL(string: UIApplicationOpenSettingsURLString)
+			UIApplication.sharedApplication().openURL(url!)
+		}))
+		alert.addAction(UIAlertAction(title: "Close", style: .Cancel, handler: nil))
+		presentViewController(alert, animated: true, completion: nil)
+	}
+	
     /*
     // MARK: - Navigation
 

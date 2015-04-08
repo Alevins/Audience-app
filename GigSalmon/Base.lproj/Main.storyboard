@@ -31,6 +31,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Musician" id="Xsf-wh-2VU"/>
+                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -47,7 +48,18 @@
                     <view key="view" contentMode="scaleToFill" id="2zj-h5-13S">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKl-tg-E6x">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="yKl-tg-E6x" secondAttribute="bottom" id="Cdw-6m-5Hy"/>
+                            <constraint firstItem="yKl-tg-E6x" firstAttribute="top" secondItem="2zj-h5-13S" secondAttribute="top" id="LGA-BP-S13"/>
+                            <constraint firstItem="yKl-tg-E6x" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leading" id="mpa-Ta-npQ"/>
+                            <constraint firstAttribute="trailing" secondItem="yKl-tg-E6x" secondAttribute="trailing" id="qxG-nE-OeT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6qf-3i-mkD"/>
                 </viewController>
