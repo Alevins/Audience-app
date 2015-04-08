@@ -10,6 +10,8 @@
 		9AB3CD901AD4D2570082D2AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */; };
 		9AB3CD981AD4F9700082D2AB /* GoogleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3CD961AD4F9700082D2AB /* GoogleIcon.swift */; };
 		9AB3CD991AD4F9700082D2AB /* googleicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AB3CD971AD4F9700082D2AB /* googleicon.ttf */; };
+		9AB3CD9D1AD559F90082D2AB /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3CD9B1AD559F90082D2AB /* Crashlytics.framework */; };
+		9AB3CD9E1AD559F90082D2AB /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3CD9C1AD559F90082D2AB /* Fabric.framework */; };
 		9AF5A6F91AD39AA200CEC57F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */; };
 		9AF5A7001AD39AA200CEC57F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5A6FE1AD39AA200CEC57F /* Main.storyboard */; };
 		9AF5A7021AD39AA200CEC57F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5A7011AD39AA200CEC57F /* Images.xcassets */; };
@@ -36,6 +38,8 @@
 		9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9AB3CD961AD4F9700082D2AB /* GoogleIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleIcon.swift; sourceTree = "<group>"; };
 		9AB3CD971AD4F9700082D2AB /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = googleicon.ttf; sourceTree = "<group>"; };
+		9AB3CD9B1AD559F90082D2AB /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		9AB3CD9C1AD559F90082D2AB /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		9AF5A6F31AD39AA200CEC57F /* GigSalmon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GigSalmon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF5A6F71AD39AA200CEC57F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +62,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AB3CD901AD4D2570082D2AB /* CoreLocation.framework in Frameworks */,
+				9AB3CD9D1AD559F90082D2AB /* Crashlytics.framework in Frameworks */,
 				9AF5A71B1AD39D5A00CEC57F /* MapKit.framework in Frameworks */,
+				9AB3CD9E1AD559F90082D2AB /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +151,8 @@
 		9AF5A71C1AD39D5F00CEC57F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AB3CD9B1AD559F90082D2AB /* Crashlytics.framework */,
+				9AB3CD9C1AD559F90082D2AB /* Fabric.framework */,
 				9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */,
 				9AF5A71A1AD39D5A00CEC57F /* MapKit.framework */,
 			);
@@ -161,6 +169,7 @@
 				9AF5A6EF1AD39AA200CEC57F /* Sources */,
 				9AF5A6F01AD39AA200CEC57F /* Frameworks */,
 				9AF5A6F11AD39AA200CEC57F /* Resources */,
+				9AB3CD9A1AD5598D0082D2AB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -247,6 +256,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9AB3CD9A1AD5598D0082D2AB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run fdfded49994764692b9ad295d0de86e158fd7f83 89c916e6858c57a67588027fac792f2a0b07ac0ab6ee91b33be67e2e82d41abf";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9AF5A6EF1AD39AA200CEC57F /* Sources */ = {
@@ -383,6 +408,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = GigSalmon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -393,6 +422,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = GigSalmon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
