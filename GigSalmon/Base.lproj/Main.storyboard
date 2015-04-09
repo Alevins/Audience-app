@@ -20,7 +20,7 @@
                                 <rect key="frame" x="229" y="279" width="143" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -52,16 +52,27 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKl-tg-E6x">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </mapView>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QwJ-Cg-M4a">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QwJ-Cg-M4a" secondAttribute="trailing" id="9ie-C4-MCK"/>
                             <constraint firstAttribute="bottom" secondItem="yKl-tg-E6x" secondAttribute="bottom" id="Cdw-6m-5Hy"/>
                             <constraint firstItem="yKl-tg-E6x" firstAttribute="top" secondItem="2zj-h5-13S" secondAttribute="top" id="LGA-BP-S13"/>
+                            <constraint firstAttribute="bottom" secondItem="QwJ-Cg-M4a" secondAttribute="bottom" id="R0a-VH-rAH"/>
+                            <constraint firstItem="QwJ-Cg-M4a" firstAttribute="top" secondItem="2zj-h5-13S" secondAttribute="top" id="iMS-RQ-jBf"/>
                             <constraint firstItem="yKl-tg-E6x" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leading" id="mpa-Ta-npQ"/>
                             <constraint firstAttribute="trailing" secondItem="yKl-tg-E6x" secondAttribute="trailing" id="qxG-nE-OeT"/>
+                            <constraint firstItem="QwJ-Cg-M4a" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leading" id="tvn-a3-KHR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6qf-3i-mkD"/>
+                    <connections>
+                        <outlet property="listView" destination="QwJ-Cg-M4a" id="1q0-1w-9ce"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OF5-ks-z1n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -83,7 +94,7 @@
                                 <rect key="frame" x="249" y="279" width="103" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -106,7 +117,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="qqt-f3-Ngl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="YUY-K7-r7v">
                             <rect key="frame" x="0.0" y="64" width="600" height="160"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -135,7 +146,7 @@
                                         <constraint firstAttribute="height" constant="21" id="5uK-1q-t19"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>

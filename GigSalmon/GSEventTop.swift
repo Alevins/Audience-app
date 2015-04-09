@@ -8,19 +8,19 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 class GSEventTop: UIViewController, CLLocationManagerDelegate {
 
+	@IBOutlet var listView: UITableView!
 	var locationManager = CLLocationManager()
+	var isListView: Bool = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		self.setupBarButtons()
-		
-		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-		self.navigationController?.navigationBar.shadowImage = UIImage()
-		self.navigationController?.navigationBar.translucent = true
+		self.toggleNavigationBarTranslucent()
 		
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()
@@ -56,12 +56,34 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.navigationItem.rightBarButtonItems = [listItem, filterItem, distanceItem]
 	}
 	
+	func toggleNavigationBarTranslucent() {
+		let bar = self.navigationController!.navigationBar as UINavigationBar!
+		if (self.isListView) {
+			self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
+			self.navigationController?.navigationBar.shadowImage = nil
+			self.navigationController?.navigationBar.translucent = false
+		} else {
+			self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+			self.navigationController?.navigationBar.shadowImage = UIImage()
+			self.navigationController?.navigationBar.translucent = true
+		}
+	}
+	
 	func filterAction(sender: UIBarButtonItem) {
 		println("filterAction")
 	}
 	
 	func listAction(sender: UIBarButtonItem) {
-		println("listAction")
+		UIView.animateWithDuration(0.4, animations: { () -> Void in
+			UIView.setAnimationTransition(UIViewAnimationTransition.FlipFromLeft, forView: self.view, cache: true)
+			if (self.isListView) {
+				self.listView?.hidden = true
+			} else {
+				self.listView?.hidden = false
+			}
+			self.isListView = !self.isListView
+			self.toggleNavigationBarTranslucent()
+			})
 	}
 	
 	// MARK: CLLocationManagerDelegate
