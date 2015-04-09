@@ -57,16 +57,11 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	func toggleNavigationBarTranslucent() {
-		let bar = self.navigationController!.navigationBar as UINavigationBar!
-		if (self.isListView) {
-			self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
-			self.navigationController?.navigationBar.shadowImage = nil
-			self.navigationController?.navigationBar.translucent = false
-		} else {
-			self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-			self.navigationController?.navigationBar.shadowImage = UIImage()
-			self.navigationController?.navigationBar.translucent = true
-		}
+		var image: UIImage? = self.isListView ? nil : UIImage()
+		var translucent: Bool = !self.isListView
+		self.navigationController?.navigationBar.setBackgroundImage(image, forBarMetrics: UIBarMetrics.Default)
+		self.navigationController?.navigationBar.shadowImage = image
+		self.navigationController?.navigationBar.translucent = translucent
 	}
 	
 	func filterAction(sender: UIBarButtonItem) {
@@ -75,12 +70,17 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	
 	func listAction(sender: UIBarButtonItem) {
 		UIView.animateWithDuration(0.4, animations: { () -> Void in
-			UIView.setAnimationTransition(UIViewAnimationTransition.FlipFromLeft, forView: self.view, cache: true)
+			var transition: UIViewAnimationTransition
+			var listViewHidden: Bool
 			if (self.isListView) {
-				self.listView?.hidden = true
+				transition = .FlipFromLeft
+				listViewHidden = true
 			} else {
-				self.listView?.hidden = false
+				transition = .FlipFromRight
+				listViewHidden = false
 			}
+			UIView.setAnimationTransition(transition, forView: self.view, cache: true)
+			self.listView?.hidden = listViewHidden
 			self.isListView = !self.isListView
 			self.toggleNavigationBarTranslucent()
 			})
