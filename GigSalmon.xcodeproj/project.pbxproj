@@ -210,6 +210,7 @@
 				TargetAttributes = {
 					9AF5A6F21AD39AA200CEC57F = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 3U6JKEL269;
 					};
 					9AF5A7091AD39AA200CEC57F = {
 						CreatedOnToolsVersion = 6.2;
@@ -408,6 +409,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ryoichi Tanaka (3U6JKEL269)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -415,6 +417,7 @@
 				INFOPLIST_FILE = GigSalmon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0ab7e574-85a5-461d-b735-5570e51271b4";
 			};
 			name = Debug;
 		};
@@ -422,6 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ryoichi Tanaka (3U6JKEL269)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -429,6 +433,7 @@
 				INFOPLIST_FILE = GigSalmon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0ab7e574-85a5-461d-b735-5570e51271b4";
 			};
 			name = Release;
 		};
