@@ -30,7 +30,7 @@ class GSMenuTop: UITableViewController {
 	}
 
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 		self.updateCell(cell, atIndexPath: indexPath)
 
 		return cell;
@@ -61,7 +61,7 @@ class GSMenuTop: UITableViewController {
 			thumb = UIImage()
 			break;
 		}
-		cell.textLabel?.text = title
+		cell.textLabel?.text = title as String
 		cell.imageView?.image = thumb
 	}
 }
