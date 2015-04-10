@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98790A8185CF2D12D9A87B71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4019CE4D46C3BC206D5493A7 /* libPods.a */; };
+		9A1BCDEE1AD78B8C00A9D0D1 /* EventSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A1BCDED1AD78B8C00A9D0D1 /* EventSearch.storyboard */; };
+		9A1BCDF01AD794F100A9D0D1 /* GSEventSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1BCDEF1AD794F100A9D0D1 /* GSEventSearch.swift */; };
+		9A1BCDF21AD7A69300A9D0D1 /* GSSearchTextEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1BCDF11AD7A69300A9D0D1 /* GSSearchTextEdit.swift */; };
+		9A1BCDF41AD7E4D500A9D0D1 /* GSSearchDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1BCDF31AD7E4D500A9D0D1 /* GSSearchDatePicker.swift */; };
 		9AB3CD901AD4D2570082D2AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */; };
 		9AB3CD981AD4F9700082D2AB /* GoogleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3CD961AD4F9700082D2AB /* GoogleIcon.swift */; };
 		9AB3CD991AD4F9700082D2AB /* googleicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AB3CD971AD4F9700082D2AB /* googleicon.ttf */; };
@@ -35,6 +40,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4019CE4D46C3BC206D5493A7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		417F75571B0AFDB385AA4030 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9A1BCDEA1AD784A000A9D0D1 /* GigSalmon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GigSalmon-Bridging-Header.h"; sourceTree = "<group>"; };
+		9A1BCDED1AD78B8C00A9D0D1 /* EventSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventSearch.storyboard; sourceTree = "<group>"; };
+		9A1BCDEF1AD794F100A9D0D1 /* GSEventSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSEventSearch.swift; sourceTree = "<group>"; };
+		9A1BCDF11AD7A69300A9D0D1 /* GSSearchTextEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSearchTextEdit.swift; sourceTree = "<group>"; };
+		9A1BCDF31AD7E4D500A9D0D1 /* GSSearchDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSearchDatePicker.swift; sourceTree = "<group>"; };
+		9A6ED638D8D203C43F0D7FD8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9AB3CD961AD4F9700082D2AB /* GoogleIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleIcon.swift; sourceTree = "<group>"; };
 		9AB3CD971AD4F9700082D2AB /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = googleicon.ttf; sourceTree = "<group>"; };
@@ -54,6 +67,7 @@
 		9AF5A71F1AD39E3600CEC57F /* GSEventTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSEventTop.swift; sourceTree = "<group>"; };
 		9AF5A7211AD39E4C00CEC57F /* GSVenueTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSVenueTop.swift; sourceTree = "<group>"; };
 		9AF5A7231AD39E7100CEC57F /* GSMenuTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMenuTop.swift; sourceTree = "<group>"; };
+		C5D15405B9AD644A0DF2CA61 /* Pods.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.adhoc.xcconfig; path = "Pods/Target Support Files/Pods/Pods.adhoc.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +79,7 @@
 				9AB3CD9D1AD559F90082D2AB /* Crashlytics.framework in Frameworks */,
 				9AF5A71B1AD39D5A00CEC57F /* MapKit.framework in Frameworks */,
 				9AB3CD9E1AD559F90082D2AB /* Fabric.framework in Frameworks */,
+				98790A8185CF2D12D9A87B71 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +110,7 @@
 				9AF5A70D1AD39AA200CEC57F /* GigSalmonTests */,
 				9AF5A6F41AD39AA200CEC57F /* Products */,
 				9AF5A71C1AD39D5F00CEC57F /* Frameworks */,
+				D6E34237DCCE45E80C88A711 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,13 +127,18 @@
 			isa = PBXGroup;
 			children = (
 				9AF5A6FE1AD39AA200CEC57F /* Main.storyboard */,
+				9A1BCDED1AD78B8C00A9D0D1 /* EventSearch.storyboard */,
 				9AF5A6F81AD39AA200CEC57F /* AppDelegate.swift */,
 				9AF5A71D1AD39E1F00CEC57F /* GSMusicianTop.swift */,
 				9AF5A7211AD39E4C00CEC57F /* GSVenueTop.swift */,
 				9AF5A7231AD39E7100CEC57F /* GSMenuTop.swift */,
 				9AF5A71F1AD39E3600CEC57F /* GSEventTop.swift */,
+				9A1BCDEF1AD794F100A9D0D1 /* GSEventSearch.swift */,
+				9A1BCDF11AD7A69300A9D0D1 /* GSSearchTextEdit.swift */,
+				9A1BCDF31AD7E4D500A9D0D1 /* GSSearchDatePicker.swift */,
 				9AF5A7011AD39AA200CEC57F /* Images.xcassets */,
 				9AF5A7031AD39AA200CEC57F /* LaunchScreen.xib */,
+				9A1BCDEA1AD784A000A9D0D1 /* GigSalmon-Bridging-Header.h */,
 				9AF5A6F61AD39AA200CEC57F /* Supporting Files */,
 			);
 			path = GigSalmon;
@@ -155,8 +176,19 @@
 				9AB3CD9C1AD559F90082D2AB /* Fabric.framework */,
 				9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */,
 				9AF5A71A1AD39D5A00CEC57F /* MapKit.framework */,
+				4019CE4D46C3BC206D5493A7 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D6E34237DCCE45E80C88A711 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				417F75571B0AFDB385AA4030 /* Pods.debug.xcconfig */,
+				C5D15405B9AD644A0DF2CA61 /* Pods.adhoc.xcconfig */,
+				9A6ED638D8D203C43F0D7FD8 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,10 +198,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9AF5A7141AD39AA200CEC57F /* Build configuration list for PBXNativeTarget "GigSalmon" */;
 			buildPhases = (
+				CEDDAD5FCB5BE78C492059D9 /* Check Pods Manifest.lock */,
 				9AF5A6EF1AD39AA200CEC57F /* Sources */,
 				9AF5A6F01AD39AA200CEC57F /* Frameworks */,
 				9AF5A6F11AD39AA200CEC57F /* Resources */,
 				9AB3CD9A1AD5598D0082D2AB /* ShellScript */,
+				927FD7061845B07DCD28702A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -243,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AB3CD991AD4F9700082D2AB /* googleicon.ttf in Resources */,
+				9A1BCDEE1AD78B8C00A9D0D1 /* EventSearch.storyboard in Resources */,
 				9AF5A7001AD39AA200CEC57F /* Main.storyboard in Resources */,
 				9AF5A7051AD39AA200CEC57F /* LaunchScreen.xib in Resources */,
 				9AF5A7021AD39AA200CEC57F /* Images.xcassets in Resources */,
@@ -259,6 +294,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		927FD7061845B07DCD28702A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9AB3CD9A1AD5598D0082D2AB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -272,6 +322,21 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run fdfded49994764692b9ad295d0de86e158fd7f83 89c916e6858c57a67588027fac792f2a0b07ac0ab6ee91b33be67e2e82d41abf";
 		};
+		CEDDAD5FCB5BE78C492059D9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -279,10 +344,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A1BCDF01AD794F100A9D0D1 /* GSEventSearch.swift in Sources */,
 				9AF5A71E1AD39E1F00CEC57F /* GSMusicianTop.swift in Sources */,
+				9A1BCDF41AD7E4D500A9D0D1 /* GSSearchDatePicker.swift in Sources */,
 				9AF5A7201AD39E3600CEC57F /* GSEventTop.swift in Sources */,
 				9AF5A7221AD39E4C00CEC57F /* GSVenueTop.swift in Sources */,
 				9AB3CD981AD4F9700082D2AB /* GoogleIcon.swift in Sources */,
+				9A1BCDF21AD7A69300A9D0D1 /* GSSearchTextEdit.swift in Sources */,
 				9AF5A6F91AD39AA200CEC57F /* AppDelegate.swift in Sources */,
 				9AF5A7241AD39E7100CEC57F /* GSMenuTop.swift in Sources */,
 			);
@@ -373,6 +441,7 @@
 		};
 		9A1BCDE21AD765D000A9D0D1 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5D15405B9AD644A0DF2CA61 /* Pods.adhoc.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ryoichi Tanaka (3U6JKEL269)";
@@ -384,6 +453,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0ab7e574-85a5-461d-b735-5570e51271b4";
+				SWIFT_OBJC_BRIDGING_HEADER = "GigSalmon/GigSalmon-Bridging-Header.h";
 			};
 			name = AdHoc;
 		};
@@ -491,6 +561,7 @@
 		};
 		9AF5A7151AD39AA200CEC57F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 417F75571B0AFDB385AA4030 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -502,11 +573,13 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GigSalmon/GigSalmon-Bridging-Header.h";
 			};
 			name = Debug;
 		};
 		9AF5A7161AD39AA200CEC57F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A6ED638D8D203C43F0D7FD8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -518,6 +591,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GigSalmon/GigSalmon-Bridging-Header.h";
 			};
 			name = Release;
 		};

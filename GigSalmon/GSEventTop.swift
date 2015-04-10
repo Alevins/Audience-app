@@ -65,7 +65,11 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	func filterAction(sender: UIBarButtonItem) {
-		println("filterAction")
+		let storyboard = UIStoryboard(name: "EventSearch", bundle: nil)
+		let nav = storyboard.instantiateViewControllerWithIdentifier("EventSearchNav") as! UINavigationController
+		let vc = nav.topViewController as! GSEventSearch
+		vc.delegate = self
+		self.presentViewController(nav, animated: true, completion: nil)
 	}
 	
 	func listAction(sender: UIBarButtonItem) {
@@ -86,7 +90,13 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			})
 	}
 	
-	// MARK: CLLocationManagerDelegate
+	// MARK: - Delegate methods
+	
+	func dismissSearchView() {
+		self.dismissViewControllerAnimated(true, completion: nil)
+	}
+	
+	// MARK: - CLLocationManagerDelegate
 	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		switch status {
@@ -113,15 +123,4 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		alert.addAction(UIAlertAction(title: "Close", style: .Cancel, handler: nil))
 		presentViewController(alert, animated: true, completion: nil)
 	}
-	
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
