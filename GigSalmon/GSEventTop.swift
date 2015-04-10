@@ -21,6 +21,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 
 		self.setupBarButtons()
 //		self.toggleNavigationBarTranslucent()
+		self.listView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0)
 		
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()
