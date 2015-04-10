@@ -31,7 +31,7 @@ class GSSearchTextEdit: UIViewController {
 		cancelButton.showsTouchWhenHighlighted = true
 		cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: .TouchUpInside)
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
-}
+	}
 
 	override func viewDidAppear(animated: Bool) {
 		self.textView.becomeFirstResponder()

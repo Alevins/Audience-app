@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CoreLocation
 
 class GSEventSearch: UITableViewController {
 
 	var delegate: AnyObject?
-	var keyword: String?
-	var location: String?
+	var keyword: NSString! = ""
+	var location: NSString! = ""
 	var date: NSDate? = NSDate()
 
 	override func viewDidLoad() {
@@ -98,7 +99,24 @@ class GSEventSearch: UITableViewController {
 			self.keyword = data as? String
 			break;
 		case 1:	// location
-			self.location = data as? String
+			var str = data as? NSString
+			if (str != nil && str!.length > 0) {
+				let geocoder = CLGeocoder()
+				geocoder.geocodeAddressString(data as! String, completionHandler: { (placemarks, error) -> Void in
+					let errorMessage: String?
+					if (error != nil || placemarks.count == 0) {
+						errorMessage = "Geocode Error"
+						let alert = UIAlertController(title: nil, message: "Invalid location name", preferredStyle:.Alert)
+						let cancelAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+						alert.addAction(cancelAction)
+						dispatch_async(dispatch_get_main_queue(), {
+							self.presentViewController(alert, animated: true, completion: nil)
+						});
+					} else {
+						self.location = data as? String
+					}
+				})
+			}
 			break;
 		case 2:	// date
 			self.date = data as? NSDate
@@ -106,9 +124,11 @@ class GSEventSearch: UITableViewController {
 		default:
 			break;
 		}
-		self.tableView.reloadData()
+		dispatch_async(dispatch_get_main_queue(), {
+			self.tableView.reloadData()
+		});
 	}
-
+	
 	// MARK: - UITableViewDataSource
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -118,24 +138,26 @@ class GSEventSearch: UITableViewController {
 	}
 	
 	func updateCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-		var value: String!
+		var value: NSString!
 		switch(indexPath.row) {
 		case 0:	// keyword
-			value = keyword != nil ? keyword : ""
+			value = self.keyword != nil ? self.keyword : ""
+			NSLog("keyword:\(value)")
 			break;
 		case 1:	// location
-			value = location != nil ? location : ""
+			value = self.location != nil ? self.location : ""
+			NSLog("location:\(value)")
 			break;
 		case 2:	// date
 			let df = NSDateFormatter()
 			df.dateStyle = .MediumStyle
 			df.timeStyle = .NoStyle
-			value = df.stringFromDate(date!)
+			value = df.stringFromDate(self.date!)
 			break;
 		default:
 			break;
 		}
-		cell.detailTextLabel?.text = value
+		cell.detailTextLabel?.text = value as String!
 	}
 
 	// MARK: - UITableViewDelegate
