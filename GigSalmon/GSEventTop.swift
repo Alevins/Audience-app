@@ -20,7 +20,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		super.viewDidLoad()
 
 		self.setupBarButtons()
-		self.toggleNavigationBarTranslucent()
+//		self.toggleNavigationBarTranslucent()
 		
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()
@@ -37,16 +37,16 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		label.text = "100km"
 		let distanceItem = UIBarButtonItem(customView: label)
 		
-		let filterButton = UIButton(frame: CGRectMake(0, 0, 40, 40))
-		filterButton.titleLabel?.font = UIFont(name: GoogleIconName, size: 40.0)
+		let filterButton = UIButton(frame: CGRectMake(0, 0, 28, 28))
+		filterButton.titleLabel?.font = UIFont(name: GoogleIconName, size: 28.0)
 		filterButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
 		filterButton.setTitle(GoogleIcon.e6c2, forState:.Normal)
 		filterButton.showsTouchWhenHighlighted = true
 		filterButton.addTarget(self, action: "filterAction:", forControlEvents: .TouchUpInside)
 		let filterItem = UIBarButtonItem(customView: filterButton)
 		
-		let listButton = UIButton(frame: CGRectMake(0, 0, 40, 40))
-		listButton.titleLabel?.font = UIFont(name: GoogleIconName, size: 40.0)
+		let listButton = UIButton(frame: CGRectMake(0, 0, 28, 28))
+		listButton.titleLabel?.font = UIFont(name: GoogleIconName, size: 28.0)
 		listButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
 		listButton.setTitle(GoogleIcon.e683, forState: UIControlState.Normal)
 		listButton.showsTouchWhenHighlighted = true
@@ -86,7 +86,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			UIView.setAnimationTransition(transition, forView: self.view, cache: true)
 			self.listView?.hidden = listViewHidden
 			self.isListView = !self.isListView
-			self.toggleNavigationBarTranslucent()
+//			self.toggleNavigationBarTranslucent()
 			})
 	}
 	
