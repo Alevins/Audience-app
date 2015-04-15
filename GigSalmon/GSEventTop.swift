@@ -66,11 +66,22 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	func filterAction(sender: UIBarButtonItem) {
-		let storyboard = UIStoryboard(name: "EventSearch", bundle: nil)
-		let nav = storyboard.instantiateViewControllerWithIdentifier("EventSearchNav") as! UINavigationController
-		let vc = nav.topViewController as! GSEventSearch
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let vc = storyboard.instantiateViewControllerWithIdentifier("FilterPanel") as! GSFilterPanel
 		vc.delegate = self
-		self.presentViewController(nav, animated: true, completion: nil)
+		let formSheet = MZFormSheetController(viewController: UINavigationController(rootViewController: vc))
+		vc.title = "Filter by keyword, category"
+		formSheet.presentedFormSheetSize = CGSizeMake(320, 207	+ 44)
+		formSheet.transitionStyle = MZFormSheetTransitionStyle.SlideFromTop
+		formSheet.shadowRadius = 2.0;
+		formSheet.shadowOpacity = 0.3;
+		formSheet.shouldDismissOnBackgroundViewTap = true
+		formSheet.portraitTopInset = 60.0;
+		formSheet.landscapeTopInset = 20.0;
+		
+		formSheet.willDismissCompletionHandler = { presentedFSViewController in
+		}
+		self.mz_presentFormSheetController(formSheet, animated: true, completionHandler:nil)
 	}
 	
 	func listAction(sender: UIBarButtonItem) {
@@ -95,6 +106,10 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	
 	func dismissSearchView() {
 		self.dismissViewControllerAnimated(true, completion: nil)
+	}
+	
+	func filterWithKeyword(keyword: String, andCategory category: String) {
+		println("\(keyword) - \(category)")
 	}
 	
 	// MARK: - CLLocationManagerDelegate
