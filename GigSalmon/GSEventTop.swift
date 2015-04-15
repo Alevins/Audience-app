@@ -17,6 +17,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	@IBOutlet var dateLabel: UILabel!
 	@IBOutlet var filterLabel: UILabel!
 	@IBOutlet var deleteFilterButton: UIButton!
+	var distanceLabel: UILabel?
 	var locationManager = CLLocationManager()
 	var isListView: Bool = false
 	var keyword: String?
@@ -59,11 +60,10 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	func setupBarButtons() {
-		let label = UILabel(frame: CGRectMake(0, 0, 60, 24))
-		label.textColor = UIColor.blackColor()
-		label.textAlignment = .Right
-		label.text = "100km"
-		let distanceItem = UIBarButtonItem(customView: label)
+		self.distanceLabel = UILabel(frame: CGRectMake(0, 0, 70, 24))
+		self.distanceLabel!.textColor = UIColor.blackColor()
+		self.distanceLabel!.textAlignment = .Right
+		let distanceItem = UIBarButtonItem(customView: self.distanceLabel!)
 		
 		let filterButton = UIButton(frame: CGRectMake(0, 0, 28, 28))
 		filterButton.titleLabel?.font = UIFont(name: GoogleIconName, size: 28.0)
@@ -174,7 +174,21 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.category = category
 		self.deleteFilterButton.hidden = false
 	}
+
+	// MARK: - MKMapViewDelegate
 	
+	func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
+		let leftPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, 0), toCoordinateFromView: mapView!)
+		let leftLocation: CLLocation = CLLocation(latitude: leftPoint.latitude, longitude: leftPoint.longitude)
+		let rightPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, CGRectGetMaxX(mapView.bounds)), toCoordinateFromView: mapView!)
+		let rightLocation: CLLocation = CLLocation(latitude: rightPoint.latitude, longitude: rightPoint.longitude)
+		let distance: CLLocationDistance = leftLocation.distanceFromLocation(rightLocation) / 1000
+		let numberFormatter = NSNumberFormatter()
+		numberFormatter.positiveFormat = "#,##0"
+		let distanceString = numberFormatter.stringFromNumber(round(distance))
+		self.distanceLabel!.text = distanceString! + "km"
+	}
+
 	// MARK: - CLLocationManagerDelegate
 	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {

@@ -57,6 +57,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKl-tg-E6x">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="516"/>
+                                <connections>
+                                    <outlet property="delegate" destination="cJY-hS-Het" id="SeO-1M-gUG"/>
+                                </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHy-F5-WDd">
                                 <rect key="frame" x="0.0" y="515" width="600" height="36"/>
