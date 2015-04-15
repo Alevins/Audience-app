@@ -14,8 +14,12 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 
 	@IBOutlet var mapView: MKMapView!
 	@IBOutlet var listView: UITableView!
+	@IBOutlet var filterLabel: UILabel!
+	@IBOutlet var deleteFilterButton: UIButton!
 	var locationManager = CLLocationManager()
 	var isListView: Bool = false
+	var keyword: String?
+	var category: String?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -31,6 +35,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		slider.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 0.5))
 		slider.value = 0.5
 		self.mapView.addSubview(slider)
+
+		self.deleteFilterButton.setTitle(GoogleIcon.ebce, forState:.Normal)
 		
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()
@@ -74,6 +80,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.navigationController?.navigationBar.translucent = translucent
 	}
 	
+	// MARK: - Action
+
 	func filterAction(sender: UIBarButtonItem) {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let vc = storyboard.instantiateViewControllerWithIdentifier("FilterPanel") as! GSFilterPanel
@@ -88,7 +96,9 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		formSheet.portraitTopInset = 60.0;
 		formSheet.landscapeTopInset = 20.0;
 		
-		formSheet.willDismissCompletionHandler = { presentedFSViewController in
+		formSheet.willPresentCompletionHandler = { presentedFSViewController in
+			vc.keyword = self.keyword
+			vc.category = self.category
 		}
 		self.mz_presentFormSheetController(formSheet, animated: true, completionHandler:nil)
 	}
@@ -111,6 +121,16 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			})
 	}
 	
+	@IBAction func deleteFilterAction(sender: UIButton) {
+		let transition: CATransition = CATransition()
+		transition.duration = 0.25
+		transition.type = kCATransitionFade
+		self.filterLabel.layer.addAnimation(transition, forKey: nil)
+		self.filterLabel.text = nil
+		
+		self.deleteFilterButton.hidden = true
+	}
+	
 	// MARK: - Delegate methods
 	
 	func dismissSearchView() {
@@ -118,7 +138,19 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	func filterWithKeyword(keyword: String, andCategory category: String) {
-		println("\(keyword) - \(category)")
+		let transition: CATransition = CATransition()
+		transition.duration = 0.25
+		transition.type = kCATransitionFade
+		self.filterLabel.layer.addAnimation(transition, forKey: nil)
+		self.filterLabel.text = nil
+		if count(keyword) > 0 {
+			self.filterLabel.text = "\(keyword) & \(category)"
+			self.keyword = keyword
+		} else {
+			self.filterLabel.text = "\(category)"
+		}
+		self.category = category
+		self.deleteFilterButton.hidden = false
 	}
 	
 	// MARK: - CLLocationManagerDelegate

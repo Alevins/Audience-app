@@ -4,6 +4,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="googleicon.ttf">
+            <string>googleicon</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Musician-->
         <scene sceneID="hNz-n2-bh7">
@@ -50,28 +55,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKl-tg-E6x">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </mapView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QwJ-Cg-M4a">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKl-tg-E6x">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="516"/>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHy-F5-WDd">
+                                <rect key="frame" x="0.0" y="515" width="600" height="36"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 July, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5o-Xc-oPP">
+                                        <rect key="frame" x="8" y="8" width="100" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="Ufx-pW-3JI"/>
+                                            <constraint firstAttribute="height" constant="20" id="v4C-Zh-zR2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78f-jZ-ajc">
+                                        <rect key="frame" x="562" y="3" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="H3l-oC-Q17"/>
+                                            <constraint firstAttribute="height" constant="30" id="q8e-Pm-GOS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="googleicon" family="googleicon" pointSize="24"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteFilterAction:" destination="cJY-hS-Het" eventType="touchUpInside" id="2BZ-Bc-vNQ"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fO9-EJ-0am">
+                                        <rect key="frame" x="114" y="8" width="442" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="uam-gE-6uC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="c5o-Xc-oPP" secondAttribute="centerY" id="E7N-ub-kEA"/>
+                                    <constraint firstItem="78f-jZ-ajc" firstAttribute="leading" secondItem="fO9-EJ-0am" secondAttribute="trailing" constant="6" id="JcW-M6-kSw"/>
+                                    <constraint firstItem="fO9-EJ-0am" firstAttribute="leading" secondItem="c5o-Xc-oPP" secondAttribute="trailing" constant="6" id="MZe-Q9-Dzt"/>
+                                    <constraint firstAttribute="centerY" secondItem="fO9-EJ-0am" secondAttribute="centerY" id="PEt-jh-aBd"/>
+                                    <constraint firstAttribute="centerY" secondItem="78f-jZ-ajc" secondAttribute="centerY" id="W2k-iS-DxP"/>
+                                    <constraint firstAttribute="trailing" secondItem="78f-jZ-ajc" secondAttribute="trailing" constant="8" id="jGm-o0-akP"/>
+                                    <constraint firstItem="c5o-Xc-oPP" firstAttribute="leading" secondItem="jHy-F5-WDd" secondAttribute="leading" constant="8" id="pf0-jq-18Z"/>
+                                    <constraint firstAttribute="height" constant="36" id="sQT-WV-7Yd"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="yKl-tg-E6x" firstAttribute="top" secondItem="2zj-h5-13S" secondAttribute="top" id="2cp-Qa-ySI"/>
+                            <constraint firstItem="d1r-AW-pFG" firstAttribute="top" secondItem="yKl-tg-E6x" secondAttribute="bottom" constant="35" id="48M-nM-r8P"/>
                             <constraint firstAttribute="trailing" secondItem="QwJ-Cg-M4a" secondAttribute="trailing" id="9ie-C4-MCK"/>
-                            <constraint firstAttribute="bottom" secondItem="yKl-tg-E6x" secondAttribute="bottom" id="Cdw-6m-5Hy"/>
-                            <constraint firstItem="yKl-tg-E6x" firstAttribute="top" secondItem="2zj-h5-13S" secondAttribute="top" id="LGA-BP-S13"/>
+                            <constraint firstItem="yKl-tg-E6x" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leading" id="HY5-48-EOP"/>
+                            <constraint firstAttribute="trailing" secondItem="yKl-tg-E6x" secondAttribute="trailing" id="OxE-bT-PQj"/>
+                            <constraint firstItem="d1r-AW-pFG" firstAttribute="top" secondItem="jHy-F5-WDd" secondAttribute="bottom" id="QHt-5g-uky"/>
                             <constraint firstAttribute="bottom" secondItem="QwJ-Cg-M4a" secondAttribute="bottom" id="R0a-VH-rAH"/>
+                            <constraint firstItem="jHy-F5-WDd" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leadingMargin" constant="-16" id="W94-oH-vbI"/>
                             <constraint firstItem="QwJ-Cg-M4a" firstAttribute="top" secondItem="2zj-h5-13S" secondAttribute="top" id="iMS-RQ-jBf"/>
-                            <constraint firstItem="yKl-tg-E6x" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leading" id="mpa-Ta-npQ"/>
-                            <constraint firstAttribute="trailing" secondItem="yKl-tg-E6x" secondAttribute="trailing" id="qxG-nE-OeT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jHy-F5-WDd" secondAttribute="trailing" constant="-16" id="oys-X2-TrP"/>
                             <constraint firstItem="QwJ-Cg-M4a" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leading" id="tvn-a3-KHR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6qf-3i-mkD"/>
                     <connections>
+                        <outlet property="deleteFilterButton" destination="78f-jZ-ajc" id="rH4-gS-88r"/>
+                        <outlet property="filterLabel" destination="fO9-EJ-0am" id="AOt-5u-2YD"/>
                         <outlet property="listView" destination="QwJ-Cg-M4a" id="1q0-1w-9ce"/>
                         <outlet property="mapView" destination="yKl-tg-E6x" id="ofB-6d-8FX"/>
                     </connections>

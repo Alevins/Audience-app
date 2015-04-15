@@ -14,6 +14,8 @@ class GSFilterPanel: UITableViewController {
 	@IBOutlet var textField: UITextField!
 	@IBOutlet var pickerView: UIPickerView!
 	var categories: NSArray = ["Rock","Pop", "Electronic", "Jazz","World", "Other"]
+	var keyword: String?
+	var category: String?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -33,6 +35,14 @@ class GSFilterPanel: UITableViewController {
 		cancelButton.showsTouchWhenHighlighted = true
 		cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: .TouchUpInside)
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
+		
+		if self.keyword != nil && count(self.keyword!) > 0 {
+			self.textField.text = self.keyword!
+		}
+		if self.category != nil && count(self.category!) > 0{
+			let index = categories.indexOfObject(self.category!)
+			self.pickerView.selectRow(index, inComponent: 0, animated: false)
+		}
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -44,7 +54,6 @@ class GSFilterPanel: UITableViewController {
 	func doneAction(sender: UIBarButtonItem) {
 		let delegate = self.delegate as? GSEventTop
 		if ((delegate?.respondsToSelector("filterAction:")) != nil) {
-//			let filterParam = ["keyword": self.textField.text, "category": categories[self.pickerView.selectedRowInComponent(0)]]
 			delegate!.filterWithKeyword(self.textField.text, andCategory: categories[self.pickerView.selectedRowInComponent(0)] as! String)
 		}
 		self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
