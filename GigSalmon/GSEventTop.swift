@@ -12,6 +12,7 @@ import MapKit
 
 class GSEventTop: UIViewController, CLLocationManagerDelegate {
 
+	@IBOutlet var mapView: MKMapView!
 	@IBOutlet var listView: UITableView!
 	var locationManager = CLLocationManager()
 	var isListView: Bool = false
@@ -22,6 +23,14 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.setupBarButtons()
 //		self.toggleNavigationBarTranslucent()
 		self.listView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0)
+		
+		let screenBounds = UIScreen.mainScreen().bounds
+		let sliderHeight = screenBounds.size.height - 64 - 49 - 20
+		let margin = (screenBounds.size.height - 64 - 49 - sliderHeight) / 2
+		let slider = UISlider(frame: CGRectMake(-240, (screenBounds.size.height + 64 - 49) / 2 - margin, sliderHeight, 20))
+		slider.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 0.5))
+		slider.value = 0.5
+		self.mapView.addSubview(slider)
 		
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()

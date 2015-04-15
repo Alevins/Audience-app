@@ -73,6 +73,7 @@
                     <navigationItem key="navigationItem" id="6qf-3i-mkD"/>
                     <connections>
                         <outlet property="listView" destination="QwJ-Cg-M4a" id="1q0-1w-9ce"/>
+                        <outlet property="mapView" destination="yKl-tg-E6x" id="ofB-6d-8FX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OF5-ks-z1n" userLabel="First Responder" sceneMemberID="firstResponder"/>
