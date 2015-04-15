@@ -55,10 +55,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QwJ-Cg-M4a">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKl-tg-E6x">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="516"/>
                             </mapView>
@@ -111,24 +107,29 @@
                                     <constraint firstAttribute="height" constant="36" id="sQT-WV-7Yd"/>
                                 </constraints>
                             </view>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QwJ-Cg-M4a">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="516"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yKl-tg-E6x" firstAttribute="top" secondItem="2zj-h5-13S" secondAttribute="top" id="2cp-Qa-ySI"/>
                             <constraint firstItem="d1r-AW-pFG" firstAttribute="top" secondItem="yKl-tg-E6x" secondAttribute="bottom" constant="35" id="48M-nM-r8P"/>
-                            <constraint firstAttribute="trailing" secondItem="QwJ-Cg-M4a" secondAttribute="trailing" id="9ie-C4-MCK"/>
                             <constraint firstItem="yKl-tg-E6x" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leading" id="HY5-48-EOP"/>
+                            <constraint firstAttribute="trailing" secondItem="QwJ-Cg-M4a" secondAttribute="trailing" id="I8Q-3b-XZi"/>
                             <constraint firstAttribute="trailing" secondItem="yKl-tg-E6x" secondAttribute="trailing" id="OxE-bT-PQj"/>
                             <constraint firstItem="d1r-AW-pFG" firstAttribute="top" secondItem="jHy-F5-WDd" secondAttribute="bottom" id="QHt-5g-uky"/>
-                            <constraint firstAttribute="bottom" secondItem="QwJ-Cg-M4a" secondAttribute="bottom" id="R0a-VH-rAH"/>
+                            <constraint firstItem="QwJ-Cg-M4a" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leading" id="VgD-rm-IHG"/>
                             <constraint firstItem="jHy-F5-WDd" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leadingMargin" constant="-16" id="W94-oH-vbI"/>
-                            <constraint firstItem="QwJ-Cg-M4a" firstAttribute="top" secondItem="2zj-h5-13S" secondAttribute="top" id="iMS-RQ-jBf"/>
+                            <constraint firstItem="d1r-AW-pFG" firstAttribute="top" secondItem="QwJ-Cg-M4a" secondAttribute="bottom" constant="35" id="X6I-uW-fQ6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jHy-F5-WDd" secondAttribute="trailing" constant="-16" id="oys-X2-TrP"/>
-                            <constraint firstItem="QwJ-Cg-M4a" firstAttribute="leading" secondItem="2zj-h5-13S" secondAttribute="leading" id="tvn-a3-KHR"/>
+                            <constraint firstItem="QwJ-Cg-M4a" firstAttribute="top" secondItem="2zj-h5-13S" secondAttribute="top" id="udD-sz-56G"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6qf-3i-mkD"/>
                     <connections>
+                        <outlet property="dateLabel" destination="c5o-Xc-oPP" id="zzp-t8-uFe"/>
                         <outlet property="deleteFilterButton" destination="78f-jZ-ajc" id="rH4-gS-88r"/>
                         <outlet property="filterLabel" destination="fO9-EJ-0am" id="AOt-5u-2YD"/>
                         <outlet property="listView" destination="QwJ-Cg-M4a" id="1q0-1w-9ce"/>

@@ -14,12 +14,15 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 
 	@IBOutlet var mapView: MKMapView!
 	@IBOutlet var listView: UITableView!
+	@IBOutlet var dateLabel: UILabel!
 	@IBOutlet var filterLabel: UILabel!
 	@IBOutlet var deleteFilterButton: UIButton!
 	var locationManager = CLLocationManager()
 	var isListView: Bool = false
 	var keyword: String?
 	var category: String?
+	var startDate: NSDate?
+	var currentDate: NSDate?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -28,14 +31,23 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 //		self.toggleNavigationBarTranslucent()
 		self.listView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0)
 		
+		// slider
 		let screenBounds = UIScreen.mainScreen().bounds
-		let sliderHeight = screenBounds.size.height - 64 - 49 - 20
-		let margin = (screenBounds.size.height - 64 - 49 - sliderHeight) / 2
-		let slider = UISlider(frame: CGRectMake(-240, (screenBounds.size.height + 64 - 49) / 2 - margin, sliderHeight, 20))
+		let sliderHeight = screenBounds.size.height - 64 - 49 - 36 - 20
+		let margin = (screenBounds.size.height - 64 - 49 - 36 - sliderHeight) / 2
+		let slider = UISlider(frame: CGRectMake(-230, (screenBounds.size.height + 64 - 49 - 36) / 2 - margin, sliderHeight, 20))
 		slider.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 0.5))
 		slider.value = 0.5
+		slider.addTarget(self, action: "printSliderDate:", forControlEvents: .ValueChanged)
 		self.mapView.addSubview(slider)
+		
+		// date label
+		let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+		self.currentDate = NSDate()
+		self.startDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: -15, toDate: self.currentDate!, options: nil)!
+		self.printSliderDate(slider)
 
+		// filter label
 		self.deleteFilterButton.setTitle(GoogleIcon.ebce, forState:.Normal)
 		
 		locationManager.delegate = self
@@ -129,6 +141,16 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.filterLabel.text = nil
 		
 		self.deleteFilterButton.hidden = true
+	}
+	
+	func printSliderDate(sender: UISlider) {
+		var dateRange = 30 * 24 * 60 * 60
+		var interval = NSTimeInterval(Float(dateRange) * sender.value)
+		var newDate = self.startDate!.dateByAddingTimeInterval(interval)
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+		dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+		self.dateLabel.text = dateFormatter.stringFromDate(newDate)
 	}
 	
 	// MARK: - Delegate methods
