@@ -29,31 +29,23 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		super.viewDidLoad()
 
 		self.setupBarButtons()
-//		self.toggleNavigationBarTranslucent()
 		self.listView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0)
 		
-		// slider
-		let screenBounds = UIScreen.mainScreen().bounds
-		let sliderHeight = screenBounds.size.height - 64 - 49 - 36 - 20
-		let margin = (screenBounds.size.height - 64 - 49 - 36 - sliderHeight) / 2
-		let slider = UISlider(frame: CGRectMake(-230, (screenBounds.size.height + 64 - 49 - 36) / 2 - margin, sliderHeight, 20))
-		slider.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 0.5))
-		slider.value = 0.5
-		slider.addTarget(self, action: "printSliderDate:", forControlEvents: .ValueChanged)
-		self.mapView.addSubview(slider)
-		
 		// date label
-		let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
 		self.currentDate = NSDate()
-		self.startDate = calendar.dateByAddingUnit(.CalendarUnitDay, value: -15, toDate: self.currentDate!, options: nil)!
-		self.printSliderDate(slider)
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+		dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+		self.dateLabel.text = dateFormatter.stringFromDate(self.currentDate!)
 
 		// filter label
 		self.deleteFilterButton.setTitle(GoogleIcon.ebce, forState:.Normal)
 		
+		// LocationManager permission
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()
 		
+		// Center UserLocation
 		self.mapView.userLocation.addObserver(self, forKeyPath: "location", options: NSKeyValueObservingOptions(), context: nil)
 	}
 
@@ -95,14 +87,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.mapView.userLocation.removeObserver(self, forKeyPath: "location")
 	}
 	
-	func toggleNavigationBarTranslucent() {
-		var image: UIImage? = self.isListView ? nil : UIImage()
-		var translucent: Bool = !self.isListView
-		self.navigationController?.navigationBar.setBackgroundImage(image, forBarMetrics: UIBarMetrics.Default)
-		self.navigationController?.navigationBar.shadowImage = image
-		self.navigationController?.navigationBar.translucent = translucent
-	}
-	
 	// MARK: - Action
 
 	func filterAction(sender: UIBarButtonItem) {
@@ -140,7 +124,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			UIView.setAnimationTransition(transition, forView: self.view, cache: true)
 			self.listView?.hidden = listViewHidden
 			self.isListView = !self.isListView
-//			self.toggleNavigationBarTranslucent()
 			})
 	}
 	
@@ -152,16 +135,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.filterLabel.text = nil
 		
 		self.deleteFilterButton.hidden = true
-	}
-	
-	func printSliderDate(sender: UISlider) {
-		var dateRange = 30 * 24 * 60 * 60
-		var interval = NSTimeInterval(Float(dateRange) * sender.value)
-		var newDate = self.startDate!.dateByAddingTimeInterval(interval)
-		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-		dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
-		self.dateLabel.text = dateFormatter.stringFromDate(newDate)
 	}
 	
 	// MARK: - Delegate methods
