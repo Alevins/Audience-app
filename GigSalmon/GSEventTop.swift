@@ -53,6 +53,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()
+		
+		self.mapView.userLocation.addObserver(self, forKeyPath: "location", options: NSKeyValueObservingOptions(), context: nil)
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -82,6 +84,14 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		let listItem = UIBarButtonItem(customView: listButton)
 		
 		self.navigationItem.rightBarButtonItems = [listItem, filterItem, distanceItem]
+	}
+	
+	override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+		var region = MKCoordinateRegion()
+		region.center = self.mapView.userLocation.coordinate
+		region.span.latitudeDelta = 0.1
+		region.span.longitudeDelta = 0.1
+		self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
 	}
 	
 	func toggleNavigationBarTranslucent() {
@@ -190,7 +200,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 
 	// MARK: - CLLocationManagerDelegate
-	
+
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		switch status {
 		case .NotDetermined:
