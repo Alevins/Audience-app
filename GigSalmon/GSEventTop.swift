@@ -92,6 +92,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		region.span.latitudeDelta = 0.1
 		region.span.longitudeDelta = 0.1
 		self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
+		self.mapView.userLocation.removeObserver(self, forKeyPath: "location")
 	}
 	
 	func toggleNavigationBarTranslucent() {
