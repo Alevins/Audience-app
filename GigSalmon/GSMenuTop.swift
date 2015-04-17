@@ -19,6 +19,12 @@ class GSMenuTop: UITableViewController {
 		self.versionLabel.text = "Version \(version)"
 	}
 
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		NSUserDefaults().setInteger(3, forKey: "selectedTabIndex")
+		NSUserDefaults().synchronize()
+	}
+
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 	}

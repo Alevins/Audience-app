@@ -44,6 +44,12 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.mapView.userLocation.addObserver(self, forKeyPath: "location", options: NSKeyValueObservingOptions(), context: nil)
 	}
 	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		NSUserDefaults().setInteger(1, forKey: "selectedTabIndex")
+		NSUserDefaults().synchronize()
+	}
+
 	override func viewDidLayoutSubviews() {
 		self.tabBarHeight = self.tabBarController!.tabBar.frame.height
 		self.navBarHeight = self.navigationController!.navigationBar.frame.origin.y + self.navigationController!.navigationBar.frame.size.height
