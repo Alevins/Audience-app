@@ -9,6 +9,8 @@
 import UIKit
 import Fabric
 import Crashlytics
+import Parse
+import Bolts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+		// Initialize Crashlytics
 		Fabric.with([Crashlytics()])
+		
+		// Initialize Parse
+		Parse.setApplicationId("K5hqRT1jq7QWfNhqAHZIfPjJJnVbiZT2siyNHFGS",
+			clientKey: "Bi0qHXWV36jCx3LPdEEFFOKpGYSW33a7aPLDrWRA")
 		
 		let tabBarController: UITabBarController = self.window!.rootViewController as! UITabBarController
 		tabBarController.selectedIndex = NSUserDefaults().integerForKey("selectedTabIndex")
