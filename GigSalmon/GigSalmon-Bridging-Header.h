@@ -10,5 +10,6 @@
 #define GigSalmon_GigSalmon_Bridging_Header_h
 
 #import "MZFormSheetController.h"
+#import "ActionSheetPicker.h"
 
 #endif
