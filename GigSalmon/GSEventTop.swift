@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import MapKit
+import Parse
 
 class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	@IBOutlet var mapView: MKMapView!
@@ -42,6 +43,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		
 		// center UserLocation
 		self.mapView.userLocation.addObserver(self, forKeyPath: "location", options: NSKeyValueObservingOptions(), context: nil)
+		
+//		self.insertDemoData()
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -182,6 +185,39 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		})
 	}
 	
+	// MARK: - Database
+	
+	func refreshDataSource() {
+		self.mapView.removeAnnotations(self.mapView.annotations)
+		
+		let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)
+		let comps: NSDateComponents? = calendar?.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: self.currentDate);
+		let fromDate = calendar?.dateFromComponents(comps!)
+		let toDate = fromDate!.dateByAddingTimeInterval(60 * 60 * 24)
+		
+		var query = PFQuery(className: "DemoEvents")
+		query.whereKey("date", greaterThanOrEqualTo: fromDate!)
+		query.whereKey("date", lessThan: toDate)
+		query.findObjectsInBackgroundWithBlock( { (NSArray objects, NSError error) in
+			if (error != nil) {
+				println("query failed")
+			}
+			else {
+				if let staffObjects = objects as? [PFObject] {
+					for staff in staffObjects {
+						let location = staff["location"] as! PFGeoPoint
+						let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+						let pin: MKPointAnnotation = MKPointAnnotation()
+						pin.coordinate = coordinate
+						pin.title = staff["title"] as! String
+						pin.subtitle = staff["description"] as! String
+						self.mapView.addAnnotation(pin)
+					}
+				}
+			}
+		})
+	}
+	
 	// MARK: - Action
 
 	func filterAction(sender: UIBarButtonItem) {
@@ -245,6 +281,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			self.currentDate = self.currentDate.dateByAddingTimeInterval(dayTimeInterval)
 		}
 		self.updateDateButton()
+		self.refreshDataSource()
 	}
 	
 	// MARK: - Delegate methods
@@ -282,7 +319,24 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		let distanceString = numberFormatter.stringFromNumber(round(distance))
 		self.distanceLabel!.text = distanceString! + "km"
 	}
-
+	
+	func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+		if annotation is MKUserLocation {
+			return nil
+		}
+		
+		let pinIdentifier = "PinAnnotationIdentifier"
+		var pinView: MKPinAnnotationView!
+		if pinView == nil {
+			pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: pinIdentifier)
+			pinView.animatesDrop = true
+			pinView.canShowCallout = true
+			return pinView
+		}
+		pinView.annotation = annotation
+		return pinView
+	}
+	
 	// MARK: - CLLocationManagerDelegate
 
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -309,5 +363,53 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		}))
 		alert.addAction(UIAlertAction(title: "Close", style: .Cancel, handler: nil))
 		presentViewController(alert, animated: true, completion: nil)
+	}
+	
+	// MARK: - Demo Data
+	
+	func insertDemoData() {
+		let event1 = PFObject(className: "DemoEvents")
+		event1["title"] = "demo event 1"
+		event1["description"] = "description for demo event 1"
+		event1["category"] = "Pop"
+		event1["date"] = self.dateFromString("2015-04-18 19:00:00")
+		event1["location"] = PFGeoPoint(latitude: 35.658725, longitude: 139.695608)
+		event1.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+		let event2 = PFObject(className: "DemoEvents")
+		event2["title"] = "demo event 2"
+		event2["description"] = "description for demo event 2"
+		event2["category"] = "Rock"
+		event2["date"] = self.dateFromString("2015-04-18 20:00:00")
+		event2["location"] = PFGeoPoint(latitude: 35.661902, longitude: 139.701093)
+		event2.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+		let event3 = PFObject(className: "DemoEvents")
+		event3["title"] = "demo event 3"
+		event3["description"] = "description for demo event 3"
+		event3["category"] = "Pop"
+		event3["date"] = self.dateFromString("2015-04-19 19:00:00")
+		event3["location"] = PFGeoPoint(latitude: 35.664221, longitude: 139.697773)
+		event3.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+		let event4 = PFObject(className: "DemoEvents")
+		event4["title"] = "demo event 4"
+		event4["description"] = "description for demo event 4"
+		event4["category"] = "Rock"
+		event4["date"] = self.dateFromString("2015-04-19 20:00:00")
+		event4["location"] = PFGeoPoint(latitude: 35.660981, longitude: 139.697604)
+		event4.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+	}
+	
+	func dateFromString(dateString: String) -> NSDate {
+		let formatter = NSDateFormatter()
+		formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+		let date: NSDate? = formatter.dateFromString(dateString)
+		return date!
 	}
 }
