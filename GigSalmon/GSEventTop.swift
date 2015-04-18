@@ -51,6 +51,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		super.viewDidAppear(animated)
 		NSUserDefaults().setInteger(1, forKey: "selectedTabIndex")
 		NSUserDefaults().synchronize()
+		self.refreshDataSource()
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -268,6 +269,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		var datePicker = ActionSheetDatePicker(title: "Select date", datePickerMode: UIDatePickerMode.Date, selectedDate: self.currentDate, doneBlock: { picker, value, index in
 			self.currentDate = value as! NSDate
 			self.updateDateButton()
+			self.refreshDataSource()
 			return
 			}, cancelBlock: { ActionStringCancelBlock in return	}, origin: self.tabBarController!.view)
 		datePicker.showActionSheetPicker()
@@ -368,6 +370,71 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	// MARK: - Demo Data
 	
 	func insertDemoData() {
+		let venueA = PFObject(className: "Venues")
+		venueA["name"] = "TSUTAYA O-EAST"
+		venueA["location"] = PFGeoPoint(latitude: 35.658725, longitude: 139.695608)
+		venueA["description"] = "description for TSUTAYA O-EAST"
+		venueA.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+
+		let event1 = PFObject(className: "Events")
+		event1["title"] = "demo event 1"
+		event1["description"] = "description for demo event 1"
+		event1["category"] = "Pop"
+		event1["date"] = self.dateFromString("2015-04-18 19:00:00")
+		event1["venue"] = venueA
+		event1.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+
+		let venueB = PFObject(className: "Venues")
+		venueB["name"] = "渋谷公会堂"
+		venueB["location"] = PFGeoPoint(latitude: 35.664221, longitude: 139.697773)
+		venueB["description"] = "description for 渋谷公会堂"
+		venueB.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+		
+		let event2 = PFObject(className: "Events")
+		event2["title"] = "demo event 2"
+		event2["description"] = "description for demo event 2"
+		event2["category"] = "Rock"
+		event2["date"] = self.dateFromString("2015-04-18 19:00:00")
+		event2["venue"] = venueB
+		event2.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+
+		let event3 = PFObject(className: "Events")
+		event3["title"] = "demo event 3"
+		event3["description"] = "description for demo event 3"
+		event3["category"] = "Pop"
+		event3["date"] = self.dateFromString("2015-04-19 19:00:00")
+		event3["venue"] = venueB
+		event3.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+
+		let venueC = PFObject(className: "Venues")
+		venueC["name"] = "Club Quattro"
+		venueC["location"] = PFGeoPoint(latitude: 35.660981, longitude: 139.697604)
+		venueC["description"] = "description for Club Quattro"
+		venueC.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+
+		let event4 = PFObject(className: "Events")
+		event4["title"] = "demo event 4"
+		event4["description"] = "description for demo event 4"
+		event4["category"] = "Rock"
+		event4["date"] = self.dateFromString("2015-04-19 20:00:00")
+		event4["venue"] = venueC
+		event4.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+			println("Object has been saved.")
+		}
+
+		/*
 		let event1 = PFObject(className: "DemoEvents")
 		event1["title"] = "demo event 1"
 		event1["description"] = "description for demo event 1"
@@ -377,6 +444,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		event1.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
 			println("Object has been saved.")
 		}
+		
 		let event2 = PFObject(className: "DemoEvents")
 		event2["title"] = "demo event 2"
 		event2["description"] = "description for demo event 2"
@@ -404,6 +472,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		event4.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
 			println("Object has been saved.")
 		}
+		*/
 	}
 	
 	func dateFromString(dateString: String) -> NSDate {
