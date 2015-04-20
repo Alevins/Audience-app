@@ -460,8 +460,8 @@
                     <connections>
                         <outlet property="dateLabel" destination="R6f-aq-JZY" id="aHw-cc-1XZ"/>
                         <outlet property="descriptionLabel" destination="dpa-nW-O00" id="mpq-VQ-cE0"/>
-                        <outlet property="titleLabel" destination="BGs-OH-9RO" id="wUH-RF-cwh"/>
-                        <outlet property="venueLabel" destination="BGs-OH-9RO" id="UKA-rE-5gz"/>
+                        <outlet property="titleLabel" destination="95i-ca-CZH" id="k73-ak-Z8a"/>
+                        <outlet property="venueLabel" destination="BGs-OH-9RO" id="u8S-nw-SqM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XDj-kh-uy4" userLabel="First Responder" sceneMemberID="firstResponder"/>

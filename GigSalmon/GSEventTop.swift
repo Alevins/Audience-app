@@ -231,10 +231,11 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 					for event in events {
 						let location = event["location"] as! PFGeoPoint
 						let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-						let pin: MKPointAnnotation = MKPointAnnotation()
-						pin.coordinate = coordinate
-						pin.title = event["title"] as! String
-						pin.subtitle = event["description"] as! String
+//						let pin: MKPointAnnotation = MKPointAnnotation()
+//						pin.coordinate = coordinate
+//						pin.title = event["title"] as! String
+//						pin.subtitle = event["description"] as! String
+						let pin: GSPinAnnotation = GSPinAnnotation(event: event)
 						self.eventsArray.append(event)
 						self.mapView.addAnnotation(pin)
 						
@@ -352,25 +353,30 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			return nil
 		}
 		
-		let pinIdentifier = "PinAnnotationIdentifier"
-		var pinView: MKPinAnnotationView!
-		if pinView == nil {
-			pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: pinIdentifier)
-			pinView.animatesDrop = true
-			pinView.canShowCallout = true
-			return pinView
+		let pinAnnotation = annotation as! GSPinAnnotation
+		let pinAnnotationViewID = "PinAnnotationView"
+		var pinAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(pinAnnotationViewID) as? GSPinAnnotationView
+		
+		if pinAnnotationView == nil {
+			pinAnnotationView = GSPinAnnotationView(annotation: pinAnnotation, reuseIdentifier: pinAnnotationViewID)
 		}
-		pinView.annotation = annotation
-		return pinView
+		pinAnnotationView!.image = UIImage(named: "MapPinBlue")
+		pinAnnotationView!.annotation = pinAnnotation
+		
+		return pinAnnotationView
 	}
 	
 	func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-//		let param = ["title": ]
+		let pin: GSPinAnnotation = view.annotation as! GSPinAnnotation
+		let event: PFObject = pin.event
+		self.eventGlance!.updateParam(event)
 		self.toggleEventGlance()
+		view.image = UIImage(named: "MapPinRed")
 	}
 	
 	func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
 		self.toggleEventGlance()
+		view.image = UIImage(named: "MapPinBlue")
 	}
 	
 	// MARK: - CLLocationManagerDelegate
