@@ -31,7 +31,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	var datePrevButton: UIButton?
 	var tabBarHeight: CGFloat = 0.0
 	var navBarHeight: CGFloat = 0.0
-	var eventsArray: [AnyObject] = []
+	var eventsArray: [PFObject] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -225,7 +225,9 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 				println("query failed")
 			} else {
 				if let events = objects as? [PFObject] {
+					self.eventsArray.removeAll(keepCapacity: false)
 					for event in events {
+						self.eventsArray.append(event)
 						let venue: PFObject = event["venue"] as! PFObject
 						venue.fetchIfNeededInBackgroundWithBlock( { (PFObject object, NSError error) in
 							if error != nil {
@@ -240,6 +242,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 					}
 				}
 			}
+			self.listView.reloadData()
 		})
 	}
 	
@@ -395,6 +398,27 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		view.image = UIImage(named: "MapPinBlue")
 	}
 	
+	// MARK: - UITableViewDataSource
+	
+	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return self.eventsArray.count
+	}
+	
+	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+		self.updateCell(cell, atIndexPath: indexPath)
+		
+		return cell;
+	}
+	
+	func updateCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+		let event: PFObject = self.eventsArray[indexPath.row]
+		cell.textLabel!.text = event["title"] as? String
+		cell.detailTextLabel!.text = event["description"] as? String
+	}
+	
+	// MARK: - UITableViewDelegate
+
 	// MARK: - CLLocationManagerDelegate
 
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
