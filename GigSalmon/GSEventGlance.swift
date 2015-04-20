@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Parse
+//import Parse
 
 class GSEventGlance: UIViewController {
 
@@ -24,20 +24,14 @@ class GSEventGlance: UIViewController {
 		super.didReceiveMemoryWarning()
 	}
 	
-	func updateParam(param: PFObject) {
-		
-		println(param["title"])
-		println(param["description"])
-		println(param["category"])
-		println(param["date"])
-
+	func updateParam(param: Dictionary<String, AnyObject?>) {
 		let date: NSDate = param["date"] as! NSDate
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
 		dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle
 		self.dateLabel.text = dateFormatter.stringFromDate(date)
 		self.titleLabel.text = (param["title"] as? String ?? "")
-		self.venueLabel.text = "@" + (param["category"] as? String ?? "")
+		self.venueLabel.text = "@" + (param["venue"] as? String ?? "")
 		self.descriptionLabel.text = (param["description"] as? String ?? "")
 	}
 }

@@ -46,8 +46,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		
 		// center UserLocation
 		self.mapView.userLocation.addObserver(self, forKeyPath: "location", options: NSKeyValueObservingOptions(), context: nil)
-
-//		self.insertDemoData()
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -219,26 +217,26 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		let fromDate = calendar?.dateFromComponents(comps!)
 		let toDate = fromDate!.dateByAddingTimeInterval(60 * 60 * 24)
 		
-		var query = PFQuery(className: "DemoEvents")
+		var query = PFQuery(className: "Events")
 		query.whereKey("date", greaterThanOrEqualTo: fromDate!)
 		query.whereKey("date", lessThan: toDate)
 		query.findObjectsInBackgroundWithBlock( { (NSArray objects, NSError error) in
-			if (error != nil) {
+			if error != nil {
 				println("query failed")
-			}
-			else {
+			} else {
 				if let events = objects as? [PFObject] {
 					for event in events {
-						let location = event["location"] as! PFGeoPoint
-						let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-//						let pin: MKPointAnnotation = MKPointAnnotation()
-//						pin.coordinate = coordinate
-//						pin.title = event["title"] as! String
-//						pin.subtitle = event["description"] as! String
-						let pin: GSPinAnnotation = GSPinAnnotation(event: event)
-						self.eventsArray.append(event)
-						self.mapView.addAnnotation(pin)
-						
+						let venue: PFObject = event["venue"] as! PFObject
+						venue.fetchIfNeededInBackgroundWithBlock( { (PFObject object, NSError error) in
+							if error != nil {
+								println("query failed")
+							} else {
+								let location = venue["location"] as! PFGeoPoint
+								let param: Dictionary = ["title": event["title"], "date": event["date"], "description": event["description"], "category": event["category"], "venue": venue["name"], "latitude": location.latitude, "longitude": location.longitude]
+								let pin: GSPinAnnotation = GSPinAnnotation(event: param)
+								self.mapView.addAnnotation(pin)
+							}
+						})
 					}
 				}
 			}
@@ -336,6 +334,16 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 
 	// MARK: - MKMapViewDelegate
 	
+	func mapView(mapView: MKMapView!, didAddAnnotationViews views: [AnyObject]!) {
+		for view in views {
+			if view is GSPinAnnotationView {
+				continue
+			}
+			let annotationView: MKAnnotationView = view as! MKAnnotationView
+			annotationView.canShowCallout = false
+		}
+	}
+	
 	func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
 		let leftPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, 0), toCoordinateFromView: mapView!)
 		let leftLocation: CLLocation = CLLocation(latitude: leftPoint.latitude, longitude: leftPoint.longitude)
@@ -367,14 +375,22 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+		if view.annotation is MKUserLocation {
+			return
+		}
+		
 		let pin: GSPinAnnotation = view.annotation as! GSPinAnnotation
-		let event: PFObject = pin.event
+		let event: Dictionary = pin.event
 		self.eventGlance!.updateParam(event)
 		self.toggleEventGlance()
 		view.image = UIImage(named: "MapPinRed")
 	}
 	
 	func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
+		if view.annotation is MKUserLocation {
+			return
+		}
+		
 		self.toggleEventGlance()
 		view.image = UIImage(named: "MapPinBlue")
 	}
@@ -413,120 +429,5 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		if segue.identifier == "EventGlanceSegue" {
 			self.eventGlance = segue.destinationViewController as? GSEventGlance
 		}
-	}
-
-	// MARK: - Demo Data
-	
-	func insertDemoData() {
-		let venueA = PFObject(className: "Venues")
-		venueA["name"] = "TSUTAYA O-EAST"
-		venueA["location"] = PFGeoPoint(latitude: 35.658725, longitude: 139.695608)
-		venueA["description"] = "description for TSUTAYA O-EAST"
-		venueA.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-
-		let event1 = PFObject(className: "Events")
-		event1["title"] = "demo event 1"
-		event1["description"] = "description for demo event 1"
-		event1["category"] = "Pop"
-		event1["date"] = self.dateFromString("2015-04-18 19:00:00")
-		event1["venue"] = venueA
-		event1.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-
-		let venueB = PFObject(className: "Venues")
-		venueB["name"] = "渋谷公会堂"
-		venueB["location"] = PFGeoPoint(latitude: 35.664221, longitude: 139.697773)
-		venueB["description"] = "description for 渋谷公会堂"
-		venueB.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-		
-		let event2 = PFObject(className: "Events")
-		event2["title"] = "demo event 2"
-		event2["description"] = "description for demo event 2"
-		event2["category"] = "Rock"
-		event2["date"] = self.dateFromString("2015-04-18 19:00:00")
-		event2["venue"] = venueB
-		event2.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-
-		let event3 = PFObject(className: "Events")
-		event3["title"] = "demo event 3"
-		event3["description"] = "description for demo event 3"
-		event3["category"] = "Pop"
-		event3["date"] = self.dateFromString("2015-04-19 19:00:00")
-		event3["venue"] = venueB
-		event3.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-
-		let venueC = PFObject(className: "Venues")
-		venueC["name"] = "Club Quattro"
-		venueC["location"] = PFGeoPoint(latitude: 35.660981, longitude: 139.697604)
-		venueC["description"] = "description for Club Quattro"
-		venueC.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-
-		let event4 = PFObject(className: "Events")
-		event4["title"] = "demo event 4"
-		event4["description"] = "description for demo event 4"
-		event4["category"] = "Rock"
-		event4["date"] = self.dateFromString("2015-04-19 20:00:00")
-		event4["venue"] = venueC
-		event4.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-
-		/*
-		let event1 = PFObject(className: "DemoEvents")
-		event1["title"] = "demo event 1"
-		event1["description"] = "description for demo event 1"
-		event1["category"] = "Pop"
-		event1["date"] = self.dateFromString("2015-04-18 19:00:00")
-		event1["location"] = PFGeoPoint(latitude: 35.658725, longitude: 139.695608)
-		event1.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-		
-		let event2 = PFObject(className: "DemoEvents")
-		event2["title"] = "demo event 2"
-		event2["description"] = "description for demo event 2"
-		event2["category"] = "Rock"
-		event2["date"] = self.dateFromString("2015-04-18 20:00:00")
-		event2["location"] = PFGeoPoint(latitude: 35.661902, longitude: 139.701093)
-		event2.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-		let event3 = PFObject(className: "DemoEvents")
-		event3["title"] = "demo event 3"
-		event3["description"] = "description for demo event 3"
-		event3["category"] = "Pop"
-		event3["date"] = self.dateFromString("2015-04-19 19:00:00")
-		event3["location"] = PFGeoPoint(latitude: 35.664221, longitude: 139.697773)
-		event3.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-		let event4 = PFObject(className: "DemoEvents")
-		event4["title"] = "demo event 4"
-		event4["description"] = "description for demo event 4"
-		event4["category"] = "Rock"
-		event4["date"] = self.dateFromString("2015-04-19 20:00:00")
-		event4["location"] = PFGeoPoint(latitude: 35.660981, longitude: 139.697604)
-		event4.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-			println("Object has been saved.")
-		}
-		*/
-	}
-	
-	func dateFromString(dateString: String) -> NSDate {
-		let formatter = NSDateFormatter()
-		formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-		let date: NSDate? = formatter.dateFromString(dateString)
-		return date!
 	}
 }
