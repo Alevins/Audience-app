@@ -14,6 +14,8 @@ import Parse
 class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	@IBOutlet var mapView: MKMapView!
 	@IBOutlet var listView: UITableView!
+	@IBOutlet var eventGlanceContainer: UIView!
+	var eventGlance: GSEventGlance?
 	var distanceLabel: UILabel?
 	var locationManager = CLLocationManager()
 	var isListView: Bool = false
@@ -29,6 +31,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	var datePrevButton: UIButton?
 	var tabBarHeight: CGFloat = 0.0
 	var navBarHeight: CGFloat = 0.0
+	var eventsArray: [AnyObject] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -43,7 +46,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		
 		// center UserLocation
 		self.mapView.userLocation.addObserver(self, forKeyPath: "location", options: NSKeyValueObservingOptions(), context: nil)
-		
+
 //		self.insertDemoData()
 	}
 	
@@ -52,6 +55,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		NSUserDefaults().setInteger(1, forKey: "selectedTabIndex")
 		NSUserDefaults().synchronize()
 		self.refreshDataSource()
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -70,7 +74,17 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.filterLabel!.frame = CGRectMake(12, 8, screenBounds.size.width - 12 - 30 - 12 - 6, 20)
 		self.filterDeleteButton!.frame = CGRectMake(screenBounds.size.width - 30 - 12, 3, 30, 30)
 
+		let glanceHeight: CGFloat = self.mapView!.selectedAnnotations != nil && self.mapView!.selectedAnnotations.count > 0 ? 120 : 0
+		self.eventGlanceContainer.frame = CGRectMake(0, screenBounds.size.height - glanceHeight - self.tabBarHeight, screenBounds.size.width, glanceHeight)
+
 		self.listView.contentInset = UIEdgeInsetsMake(self.navBarHeight + filterBarHeight, 0, self.tabBarHeight + dateBarHeight, 0)
+	}
+	
+	func onOrientationChange(notification: NSNotification) {
+		let deviceOrientation: UIDeviceOrientation! = UIDevice.currentDevice().orientation
+		let glanceHeight: CGFloat = self.mapView!.selectedAnnotations != nil && self.mapView!.selectedAnnotations.count > 0 ? 120 : 0
+		let screenBounds = UIScreen.mainScreen().bounds
+		self.eventGlanceContainer.frame = CGRectMake(0, screenBounds.size.height - glanceHeight - self.tabBarHeight, screenBounds.size.width, glanceHeight)
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -186,6 +200,15 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		})
 	}
 	
+	func toggleEventGlance() {
+		let screenBounds = UIScreen.mainScreen().bounds
+		let glanceHeight: CGFloat = self.mapView!.selectedAnnotations != nil && self.mapView!.selectedAnnotations.count > 0 ? 120 : 0
+		UIView.animateWithDuration(0.25, animations: { () -> Void in
+			self.eventGlanceContainer.frame = CGRectMake(0, screenBounds.size.height - glanceHeight - self.tabBarHeight, screenBounds.size.width, glanceHeight)
+			self.dateBarView!.hidden = glanceHeight != 0
+		})
+	}
+	
 	// MARK: - Database
 	
 	func refreshDataSource() {
@@ -204,15 +227,17 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 				println("query failed")
 			}
 			else {
-				if let staffObjects = objects as? [PFObject] {
-					for staff in staffObjects {
-						let location = staff["location"] as! PFGeoPoint
+				if let events = objects as? [PFObject] {
+					for event in events {
+						let location = event["location"] as! PFGeoPoint
 						let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.latitude, location.longitude)
 						let pin: MKPointAnnotation = MKPointAnnotation()
 						pin.coordinate = coordinate
-						pin.title = staff["title"] as! String
-						pin.subtitle = staff["description"] as! String
+						pin.title = event["title"] as! String
+						pin.subtitle = event["description"] as! String
+						self.eventsArray.append(event)
 						self.mapView.addAnnotation(pin)
+						
 					}
 				}
 			}
@@ -339,6 +364,15 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		return pinView
 	}
 	
+	func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+//		let param = ["title": ]
+		self.toggleEventGlance()
+	}
+	
+	func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
+		self.toggleEventGlance()
+	}
+	
 	// MARK: - CLLocationManagerDelegate
 
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -367,6 +401,14 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		presentViewController(alert, animated: true, completion: nil)
 	}
 	
+	// MARK: - Segue Navigation
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "EventGlanceSegue" {
+			self.eventGlance = segue.destinationViewController as? GSEventGlance
+		}
+	}
+
 	// MARK: - Demo Data
 	
 	func insertDemoData() {
