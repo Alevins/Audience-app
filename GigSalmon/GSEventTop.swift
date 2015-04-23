@@ -220,6 +220,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		var query = PFQuery(className: "Events")
 		query.whereKey("date", greaterThanOrEqualTo: fromDate!)
 		query.whereKey("date", lessThan: toDate)
+		query.includeKey("venue")
 		query.findObjectsInBackgroundWithBlock( { (NSArray objects, NSError error) in
 			if error != nil {
 				println("query failed")
@@ -229,16 +230,10 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 					for event in events {
 						self.eventsArray.append(event)
 						let venue: PFObject = event["venue"] as! PFObject
-						venue.fetchIfNeededInBackgroundWithBlock( { (PFObject object, NSError error) in
-							if error != nil {
-								println("query failed")
-							} else {
-								let location = venue["location"] as! PFGeoPoint
-								let param: Dictionary = ["title": event["title"], "date": event["date"], "description": event["description"], "category": event["category"], "venue": venue["name"], "latitude": location.latitude, "longitude": location.longitude]
-								let pin: GSPinAnnotation = GSPinAnnotation(event: param)
-								self.mapView.addAnnotation(pin)
-							}
-						})
+						let location = venue["location"] as! PFGeoPoint
+						let param: Dictionary = ["title": event["title"], "date": event["date"], "description": event["description"], "category": event["category"], "venue": venue["name"], "latitude": location.latitude, "longitude": location.longitude]
+						let pin: GSPinAnnotation = GSPinAnnotation(event: param)
+						self.mapView.addAnnotation(pin)
 					}
 				}
 			}
