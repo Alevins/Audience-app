@@ -32,6 +32,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	var tabBarHeight: CGFloat = 0.0
 	var navBarHeight: CGFloat = 0.0
 	var eventsArray: [PFObject] = []
+	var isRegionChanged: Bool = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -174,6 +175,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		region.span.longitudeDelta = 0.1
 		self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
 		self.mapView.userLocation.removeObserver(self, forKeyPath: "location")
+		self.isRegionChanged = true
 	}
 	
 	func updateDateButton() {
@@ -218,6 +220,9 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	// MARK: - Database
 	
 	func refreshDataSource() {
+		if (!self.isRegionChanged) {
+			return
+		}
 		self.mapView.removeAnnotations(self.mapView.annotations)
 		
 		let southwestPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, CGRectGetMaxY(mapView.bounds)), toCoordinateFromView: mapView!)
