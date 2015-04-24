@@ -52,7 +52,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		super.viewDidAppear(animated)
 		NSUserDefaults().setInteger(1, forKey: "selectedTabIndex")
 		NSUserDefaults().synchronize()
-		self.refreshDataSource()
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange:", name: UIDeviceOrientationDidChangeNotification, object: nil)
 	}
 
@@ -207,21 +206,37 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		})
 	}
 	
+	func mapViewDistance() -> CLLocationDistance {
+		let upLeftPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, 0), toCoordinateFromView: mapView!)
+		let upLeftLocation: CLLocation = CLLocation(latitude: upLeftPoint.latitude, longitude: upLeftPoint.longitude)
+		let downRightPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(CGRectGetMaxY(mapView.bounds), CGRectGetMaxX(mapView.bounds)), toCoordinateFromView: mapView!)
+		let downRightLocation: CLLocation = CLLocation(latitude: downRightPoint.latitude, longitude: downRightPoint.longitude)
+		let distance: CLLocationDistance = upLeftLocation.distanceFromLocation(downRightLocation)
+		return distance
+	}
+
 	// MARK: - Database
 	
 	func refreshDataSource() {
 		self.mapView.removeAnnotations(self.mapView.annotations)
+		
+		let southwestPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, CGRectGetMaxY(mapView.bounds)), toCoordinateFromView: mapView!)
+		let northeastPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(CGRectGetMaxX(mapView.bounds), 0), toCoordinateFromView: mapView!)
+		
+		var venuesQuery = PFQuery(className: "Venues")
+		venuesQuery.whereKey("location", withinGeoBoxFromSouthwest: PFGeoPoint(latitude: southwestPoint.latitude, longitude: southwestPoint.longitude), toNortheast: PFGeoPoint(latitude: northeastPoint.latitude, longitude: northeastPoint.longitude))
 		
 		let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)
 		let comps: NSDateComponents? = calendar?.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: self.currentDate);
 		let fromDate = calendar?.dateFromComponents(comps!)
 		let toDate = fromDate!.dateByAddingTimeInterval(60 * 60 * 24)
 		
-		var query = PFQuery(className: "Events")
-		query.whereKey("date", greaterThanOrEqualTo: fromDate!)
-		query.whereKey("date", lessThan: toDate)
-		query.includeKey("venue")
-		query.findObjectsInBackgroundWithBlock( { (NSArray objects, NSError error) in
+		var eventsQuery = PFQuery(className: "Events")
+		eventsQuery.whereKey("date", greaterThanOrEqualTo: fromDate!)
+		eventsQuery.whereKey("date", lessThan: toDate)
+		eventsQuery.whereKey("venue", matchesQuery: venuesQuery)
+		eventsQuery.includeKey("venue")
+		eventsQuery.findObjectsInBackgroundWithBlock( { (NSArray objects, NSError error) in
 			if error != nil {
 				println("query failed")
 			} else {
@@ -343,15 +358,12 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
-		let leftPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, 0), toCoordinateFromView: mapView!)
-		let leftLocation: CLLocation = CLLocation(latitude: leftPoint.latitude, longitude: leftPoint.longitude)
-		let rightPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, CGRectGetMaxX(mapView.bounds)), toCoordinateFromView: mapView!)
-		let rightLocation: CLLocation = CLLocation(latitude: rightPoint.latitude, longitude: rightPoint.longitude)
-		let distance: CLLocationDistance = leftLocation.distanceFromLocation(rightLocation) / 1000
+		let distance = self.mapViewDistance() / 1000
 		let numberFormatter = NSNumberFormatter()
 		numberFormatter.positiveFormat = "#,##0"
 		let distanceString = numberFormatter.stringFromNumber(round(distance))
 		self.distanceLabel!.text = distanceString! + "km"
+		self.refreshDataSource()
 	}
 	
 	func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
