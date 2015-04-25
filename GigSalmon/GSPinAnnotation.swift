@@ -8,18 +8,21 @@
 
 import UIKit
 import MapKit
+import Parse
 
 class GSPinAnnotation: NSObject, MKAnnotation {
 	var coordinate: CLLocationCoordinate2D
 	var title: String?
 	var subtitle: String?
-	let event: Dictionary<String, AnyObject?>
+	let event: PFObject?
 
-	init(event aEvent: Dictionary<String, AnyObject?>) {
+	init(event aEvent: PFObject) {
 		event = aEvent
 		title = aEvent["title"] as? String
 		subtitle = aEvent["description"] as? String
-		coordinate = CLLocationCoordinate2DMake(aEvent["latitude"] as! CLLocationDegrees, aEvent["longitude"] as! CLLocationDegrees)
+		let venue: PFObject = aEvent["venue"] as! PFObject
+		let location = venue["location"] as! PFGeoPoint
+		coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
 		super.init()
 	}
 }

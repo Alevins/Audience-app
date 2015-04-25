@@ -249,10 +249,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 					self.eventsArray.removeAll(keepCapacity: false)
 					for event in events {
 						self.eventsArray.append(event)
-						let venue: PFObject = event["venue"] as! PFObject
-						let location = venue["location"] as! PFGeoPoint
-						let param: Dictionary = ["title": event["title"], "date": event["date"], "description": event["description"], "category": event["category"], "venue": venue["name"], "latitude": location.latitude, "longitude": location.longitude]
-						let pin: GSPinAnnotation = GSPinAnnotation(event: param)
+						let pin: GSPinAnnotation = GSPinAnnotation(event: event)
 						self.mapView.addAnnotation(pin)
 					}
 				}
@@ -395,7 +392,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		}
 		
 		let pin: GSPinAnnotation = view.annotation as! GSPinAnnotation
-		let event: Dictionary = pin.event
+		let event: PFObject = pin.event!
 		self.eventGlance!.updateParam(event)
 		self.toggleEventGlance()
 		view.image = UIImage(named: "MapPinRed")
