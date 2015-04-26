@@ -239,6 +239,13 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		var eventsQuery = PFQuery(className: "Events")
 		eventsQuery.whereKey("date", greaterThanOrEqualTo: fromDate!)
 		eventsQuery.whereKey("date", lessThan: toDate)
+		if count(self.category) > 0 {
+			eventsQuery.whereKey("category", equalTo:self.category!)
+		}
+		if count(self.keyword) > 0 {
+//			let titlePredicate = NSPredicate(format: "title BEGINSWITH '\(self.keyword)'")
+			eventsQuery.whereKey("title", hasPrefix:self.keyword!)
+		}
 		eventsQuery.whereKey("venue", matchesQuery: venuesQuery)
 		eventsQuery.includeKey("venue")
 		eventsQuery.findObjectsInBackgroundWithBlock( { (NSArray objects, NSError error) in
@@ -295,13 +302,14 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			UIView.setAnimationTransition(transition, forView: self.view, cache: true)
 			self.listView?.hidden = listViewHidden
 			self.isListView = !self.isListView
-			})
+		})
 	}
 	
 	func deleteFilterAction(sender: UIButton) {
 		self.keyword = ""
 		self.category = ""
 		self.toggleFilterBar()
+		self.refreshDataSource()
 	}
 	
 	func dateButtonAction(sender: UIButton) {
@@ -342,9 +350,11 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			self.keyword = keyword
 		} else {
 			self.filterLabel!.text = "\(category)"
+			self.keyword = ""
 		}
 		self.category = category
 		self.toggleFilterBar()
+		self.refreshDataSource()
 	}
 
 	// MARK: - MKMapViewDelegate
