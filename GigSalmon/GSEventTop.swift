@@ -32,6 +32,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	var tabBarHeight: CGFloat = 0.0
 	var navBarHeight: CGFloat = 0.0
 	var eventsArray: [PFObject] = []
+	var eventIds: [String] = []
 	var isRegionChanged: Bool = false
 	
 	override func viewDidLoad() {
@@ -223,7 +224,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		if (!self.isRegionChanged) {
 			return
 		}
-		self.mapView.removeAnnotations(self.mapView.annotations)
 		
 		let southwestPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, CGRectGetMaxY(mapView.bounds)), toCoordinateFromView: mapView!)
 		let northeastPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(CGRectGetMaxX(mapView.bounds), 0), toCoordinateFromView: mapView!)
@@ -239,6 +239,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		var eventsQuery = PFQuery(className: "Events")
 		eventsQuery.whereKey("date", greaterThanOrEqualTo: fromDate!)
 		eventsQuery.whereKey("date", lessThan: toDate)
+		eventsQuery.whereKey("identifier", notContainedIn: self.eventIds)
 		if count(self.category) > 0 {
 			eventsQuery.whereKey("category", equalTo:self.category!)
 		}
@@ -253,9 +254,10 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 				println("query failed")
 			} else {
 				if let events = objects as? [PFObject] {
-					self.eventsArray.removeAll(keepCapacity: false)
+					println(events)
 					for event in events {
 						self.eventsArray.append(event)
+						self.eventIds.append(event["identifier"] as! String)
 						let pin: GSPinAnnotation = GSPinAnnotation(event: event)
 						self.mapView.addAnnotation(pin)
 					}
