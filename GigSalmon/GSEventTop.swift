@@ -254,7 +254,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 				println("query failed")
 			} else {
 				if let events = objects as? [PFObject] {
-					println(events)
 					for event in events {
 						self.eventsArray.append(event)
 						self.eventIds.append(event["identifier"] as! String)
@@ -290,16 +289,18 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.mz_presentFormSheetController(formSheet, animated: true, completionHandler:nil)
 	}
 	
-	func listAction(sender: UIBarButtonItem) {
+	func listAction(sender: UIButton) {
 		UIView.animateWithDuration(0.4, animations: { () -> Void in
 			var transition: UIViewAnimationTransition
 			var listViewHidden: Bool
 			if (self.isListView) {
 				transition = .FlipFromLeft
 				listViewHidden = true
+				sender.setTitle(GoogleIcon.e683, forState: UIControlState.Normal)
 			} else {
 				transition = .FlipFromRight
 				listViewHidden = false
+				sender.setTitle(GoogleIcon.e6be, forState: UIControlState.Normal)
 			}
 			UIView.setAnimationTransition(transition, forView: self.view, cache: true)
 			self.listView?.hidden = listViewHidden
