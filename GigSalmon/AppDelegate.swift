@@ -16,15 +16,29 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-
+	var selectedDbIndex: Int = 0
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Initialize Crashlytics
 		Fabric.with([Crashlytics()])
 		
 		// Initialize Parse
-		Parse.setApplicationId("K5hqRT1jq7QWfNhqAHZIfPjJJnVbiZT2siyNHFGS",
-			clientKey: "Bi0qHXWV36jCx3LPdEEFFOKpGYSW33a7aPLDrWRA")
+		selectedDbIndex = NSUserDefaults().integerForKey("selectedDbIndex")
+		var applicationId = ""
+		var clientKey = ""
+		switch(selectedDbIndex) {
+		case 0:	// GigSalmon_Dev
+			applicationId = "K5hqRT1jq7QWfNhqAHZIfPjJJnVbiZT2siyNHFGS"
+			clientKey = "Bi0qHXWV36jCx3LPdEEFFOKpGYSW33a7aPLDrWRA"
+			break;
+		case 1:	// GigSalmon_Staging
+			applicationId = "nvnGE3WBNEGWF9UF29EfXNQVjWlX7m34YCbUwj95"
+			clientKey = "Y9n82Tmo0wioH1wUVCm5Vj2DwEZh0WgxB8gC8tu8"
+			break;
+		default:
+			break;
+		}
+		Parse.setApplicationId(applicationId, clientKey: clientKey)
 		
 		let tabBarController: UITabBarController = self.window!.rootViewController as! UITabBarController
 		tabBarController.selectedIndex = NSUserDefaults().integerForKey("selectedTabIndex")

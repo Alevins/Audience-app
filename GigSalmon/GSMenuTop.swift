@@ -70,4 +70,20 @@ class GSMenuTop: UITableViewController {
 		cell.textLabel?.text = title as String
 		cell.imageView?.image = thumb
 	}
+	
+	// MARK: - UITableViewDelegate
+	
+	override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+		if indexPath.row == 2 {
+			return indexPath
+		}
+		return nil
+	}
+	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		if indexPath.row == 2 {
+			self.performSegueWithIdentifier("ShowDBSelectionSegue", sender: self)
+		}
+	}
+	
 }

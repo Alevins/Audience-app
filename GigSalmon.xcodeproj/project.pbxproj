@@ -17,6 +17,8 @@
 		9AB3CD991AD4F9700082D2AB /* googleicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AB3CD971AD4F9700082D2AB /* googleicon.ttf */; };
 		9AB3CD9D1AD559F90082D2AB /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3CD9B1AD559F90082D2AB /* Crashlytics.framework */; };
 		9AB3CD9E1AD559F90082D2AB /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3CD9C1AD559F90082D2AB /* Fabric.framework */; };
+		9AD82E111AEDF4AC0022BC77 /* GSMenuSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD82E101AEDF4AC0022BC77 /* GSMenuSettings.swift */; };
+		9AD82E131AEDFA1F0022BC77 /* GSSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD82E121AEDFA1F0022BC77 /* GSSelectionMenu.swift */; };
 		9AF2BB101AE0D3B0007BE97A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF2BB0E1AE0D3B0007BE97A /* Bolts.framework */; };
 		9AF2BB111AE0D3B0007BE97A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF2BB0F1AE0D3B0007BE97A /* Parse.framework */; };
 		9AF2BB131AE0D3FB007BE97A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF2BB121AE0D3FB007BE97A /* AudioToolbox.framework */; };
@@ -67,6 +69,8 @@
 		9AB3CD971AD4F9700082D2AB /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = googleicon.ttf; sourceTree = "<group>"; };
 		9AB3CD9B1AD559F90082D2AB /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		9AB3CD9C1AD559F90082D2AB /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		9AD82E101AEDF4AC0022BC77 /* GSMenuSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMenuSettings.swift; sourceTree = "<group>"; };
+		9AD82E121AEDFA1F0022BC77 /* GSSelectionMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSelectionMenu.swift; sourceTree = "<group>"; };
 		9AF2BB0E1AE0D3B0007BE97A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9AF2BB0F1AE0D3B0007BE97A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9AF2BB121AE0D3FB007BE97A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -176,6 +180,8 @@
 				9A6AC83E1AE4A438006C1A03 /* GSPinAnnotationView.swift */,
 				9AF5A7211AD39E4C00CEC57F /* GSVenueTop.swift */,
 				9AF5A7231AD39E7100CEC57F /* GSMenuTop.swift */,
+				9AD82E101AEDF4AC0022BC77 /* GSMenuSettings.swift */,
+				9AD82E121AEDFA1F0022BC77 /* GSSelectionMenu.swift */,
 				9A1BCDF51AD94E5500A9D0D1 /* GSFilterPanel.swift */,
 				9A6AC80C1AE1E990006C1A03 /* GSEventGlance.swift */,
 				9AF5A7011AD39AA200CEC57F /* Images.xcassets */,
@@ -405,8 +411,10 @@
 				9AF5A7221AD39E4C00CEC57F /* GSVenueTop.swift in Sources */,
 				9A6AC80D1AE1E990006C1A03 /* GSEventGlance.swift in Sources */,
 				9A6AC83D1AE49F99006C1A03 /* GSPinAnnotation.swift in Sources */,
+				9AD82E111AEDF4AC0022BC77 /* GSMenuSettings.swift in Sources */,
 				9AB3CD981AD4F9700082D2AB /* GoogleIcon.swift in Sources */,
 				9A6AC83F1AE4A438006C1A03 /* GSPinAnnotationView.swift in Sources */,
+				9AD82E131AEDFA1F0022BC77 /* GSSelectionMenu.swift in Sources */,
 				9AF5A6F91AD39AA200CEC57F /* AppDelegate.swift in Sources */,
 				9AF5A7241AD39E7100CEC57F /* GSMenuTop.swift in Sources */,
 			);
