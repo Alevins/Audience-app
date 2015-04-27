@@ -15,6 +15,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	@IBOutlet var mapView: MKMapView!
 	@IBOutlet var listView: UITableView!
 	@IBOutlet var eventGlanceContainer: UIView!
+	var currentLocationButton: UIButton?
 	var eventGlance: GSEventGlance?
 	var distanceLabel: UILabel?
 	var locationManager = CLLocationManager()
@@ -48,6 +49,17 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		
 		// center UserLocation
 		self.mapView.userLocation.addObserver(self, forKeyPath: "location", options: NSKeyValueObservingOptions(), context: nil)
+		
+		// current location button
+		currentLocationButton = UIButton(frame: CGRectZero)
+		currentLocationButton!.titleLabel?.font = UIFont(name: GoogleIconName, size: 24.0)
+		currentLocationButton!.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+		currentLocationButton!.setTitle(GoogleIcon.eb95, forState: UIControlState.Normal)
+		currentLocationButton!.showsTouchWhenHighlighted = true
+		currentLocationButton!.backgroundColor = UIColor.whiteColor()
+		currentLocationButton!.layer.cornerRadius = 16
+		currentLocationButton!.addTarget(self, action: "currentLocationAction", forControlEvents: UIControlEvents.TouchUpInside)
+		self.mapView.addSubview(currentLocationButton!)
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -76,6 +88,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		let glanceHeight: CGFloat = self.mapView!.selectedAnnotations != nil && self.mapView!.selectedAnnotations.count > 0 ? 120 : 0
 		self.eventGlanceContainer.frame = CGRectMake(0, screenBounds.size.height - glanceHeight - self.tabBarHeight, screenBounds.size.width, glanceHeight)
 
+		self.currentLocationButton!.frame = CGRectMake(screenBounds.size.width - 32 - 12, screenBounds.size.height - tabBarHeight - dateBarHeight - 32 - 12, 32, 32)
+		
 		self.listView.contentInset = UIEdgeInsetsMake(self.navBarHeight + filterBarHeight, 0, self.tabBarHeight + dateBarHeight, 0)
 	}
 	
@@ -170,11 +184,12 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-		var region = MKCoordinateRegion()
-		region.center = self.mapView.userLocation.coordinate
-		region.span.latitudeDelta = 0.1
-		region.span.longitudeDelta = 0.1
-		self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
+//		var region = MKCoordinateRegion()
+//		region.center = self.mapView.userLocation.coordinate
+//		region.span.latitudeDelta = 0.1
+//		region.span.longitudeDelta = 0.1
+//		self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
+		self.currentLocationAction()
 		self.mapView.userLocation.removeObserver(self, forKeyPath: "location")
 		self.isRegionChanged = true
 	}
@@ -334,6 +349,16 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		}
 		self.updateDateButton()
 		self.refreshDataSource()
+	}
+	
+	func currentLocationAction() {
+		var region = self.mapView.region
+		region.center = self.mapView.userLocation.coordinate
+		if self.isRegionChanged == false {
+			region.span.latitudeDelta = 0.1
+			region.span.longitudeDelta = 0.1
+		}
+		self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
 	}
 	
 	// MARK: - Delegate methods
