@@ -13,13 +13,13 @@ import Parse
 
 class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	@IBOutlet var mapView: MKMapView!
-	@IBOutlet var listView: UITableView!
+	@IBOutlet var collectionView: UICollectionView!
 	@IBOutlet var eventGlanceContainer: UIView!
 	var currentLocationButton: UIButton?
 	var eventGlance: GSEventGlance?
 	var distanceLabel: UILabel?
 	var locationManager = CLLocationManager()
-	var isListView: Bool = false
+	var isCollectionView: Bool = false
 	var keyword: String! = ""
 	var category: String! = ""
 	var currentDate: NSDate! = NSDate()
@@ -32,12 +32,15 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	var datePrevButton: UIButton?
 	var tabBarHeight: CGFloat = 0.0
 	var navBarHeight: CGFloat = 0.0
-	var eventsArray: [PFObject] = []
-	var eventIds: [String] = []
 	var isRegionChanged: Bool = false
-	
+	var allCategories: [String] = []
+	var eventsInCategories = [String: [PFObject]]()
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
+		let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		self.allCategories = appDelegate.eventCategories
 
 		self.setupNavBarButtons()
 		self.setupFilterBar()
@@ -89,8 +92,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.eventGlanceContainer.frame = CGRectMake(0, screenBounds.size.height - glanceHeight - self.tabBarHeight, screenBounds.size.width, glanceHeight)
 
 		self.currentLocationButton!.frame = CGRectMake(screenBounds.size.width - 32 - 12, screenBounds.size.height - tabBarHeight - dateBarHeight - 32 - 12, 32, 32)
-		
-		self.listView.contentInset = UIEdgeInsetsMake(self.navBarHeight + filterBarHeight, 0, self.tabBarHeight + dateBarHeight, 0)
+
+		self.collectionView.contentInset = UIEdgeInsetsMake(self.navBarHeight + filterBarHeight, 0, self.tabBarHeight + dateBarHeight, 0)
 	}
 	
 	func onOrientationChange(notification: NSNotification) {
@@ -184,11 +187,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-//		var region = MKCoordinateRegion()
-//		region.center = self.mapView.userLocation.coordinate
-//		region.span.latitudeDelta = 0.1
-//		region.span.longitudeDelta = 0.1
-//		self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
 		self.currentLocationAction()
 		self.mapView.userLocation.removeObserver(self, forKeyPath: "location")
 		self.isRegionChanged = true
@@ -211,7 +209,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		frame.size.height = count(keyword) > 0 || count(category) > 0 ? 36 : 0
 		UIView.animateWithDuration(0.25, animations: { () -> Void in
 			self.filterBarView!.frame = frame
-			self.listView.contentInset = UIEdgeInsetsMake(self.navBarHeight + frame.size.height, 0, self.tabBarHeight + 36, 0)
+			self.collectionView.contentInset = UIEdgeInsetsMake(self.navBarHeight + frame.size.height, 0, self.tabBarHeight + 36, 0)
 		})
 	}
 	
@@ -240,6 +238,11 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			return
 		}
 		
+		self.mapView.removeAnnotations(self.mapView.annotations)
+		for category in self.allCategories {
+			eventsInCategories[category] = []
+		}
+
 		let southwestPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, CGRectGetMaxY(mapView.bounds)), toCoordinateFromView: mapView!)
 		let northeastPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(CGRectGetMaxX(mapView.bounds), 0), toCoordinateFromView: mapView!)
 		
@@ -254,12 +257,10 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		var eventsQuery = PFQuery(className: "Events")
 		eventsQuery.whereKey("date", greaterThanOrEqualTo: fromDate!)
 		eventsQuery.whereKey("date", lessThan: toDate)
-		eventsQuery.whereKey("identifier", notContainedIn: self.eventIds)
 		if count(self.category) > 0 {
 			eventsQuery.whereKey("category", equalTo:self.category!)
 		}
 		if count(self.keyword) > 0 {
-//			let titlePredicate = NSPredicate(format: "title BEGINSWITH '\(self.keyword)'")
 			eventsQuery.whereKey("title", hasPrefix:self.keyword!)
 		}
 		eventsQuery.whereKey("venue", matchesQuery: venuesQuery)
@@ -270,14 +271,16 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			} else {
 				if let events = objects as? [PFObject] {
 					for event in events {
-						self.eventsArray.append(event)
-						self.eventIds.append(event["identifier"] as! String)
+						let category = event["category"] as! String
+						if find(self.allCategories, category) != nil {
+							self.eventsInCategories[category]!.append(event)
+						}
 						let pin: GSPinAnnotation = GSPinAnnotation(event: event)
 						self.mapView.addAnnotation(pin)
 					}
 				}
 			}
-			self.listView.reloadData()
+			self.collectionView.reloadData()
 		})
 	}
 	
@@ -308,7 +311,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		UIView.animateWithDuration(0.4, animations: { () -> Void in
 			var transition: UIViewAnimationTransition
 			var listViewHidden: Bool
-			if (self.isListView) {
+			if (self.isCollectionView) {
 				transition = .FlipFromLeft
 				listViewHidden = true
 				sender.setTitle(GoogleIcon.e683, forState: UIControlState.Normal)
@@ -318,8 +321,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 				sender.setTitle(GoogleIcon.e6be, forState: UIControlState.Normal)
 			}
 			UIView.setAnimationTransition(transition, forView: self.view, cache: true)
-			self.listView?.hidden = listViewHidden
-			self.isListView = !self.isListView
+			self.collectionView?.hidden = listViewHidden
+			self.isCollectionView = !self.isCollectionView
 		})
 	}
 	
@@ -445,27 +448,42 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		view.image = UIImage(named: "MapPinBlue")
 	}
 	
-	// MARK: - UITableViewDataSource
+	// MARK: - UICollectionViewDataSource
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.eventsArray.count
+	func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+		return eventsInCategories.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
-		self.updateCell(cell, atIndexPath: indexPath)
-		
-		return cell;
+	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return eventsInCategories[self.allCategories[section]]!.count
 	}
-	
-	func updateCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-		let event: PFObject = self.eventsArray[indexPath.row]
-		cell.textLabel!.text = event["title"] as? String
-		cell.detailTextLabel!.text = event["description"] as? String
-	}
-	
-	// MARK: - UITableViewDelegate
 
+	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+		let cell: UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! UICollectionViewCell
+		let category: String = self.allCategories[indexPath.section] as String
+		let arr: Array = self.eventsInCategories[category]!
+		let event: PFObject = arr[indexPath.item] as PFObject
+		let nameLabel = cell.contentView.viewWithTag(1) as! UILabel
+		nameLabel.text = event["title"] as? String
+		let venueLabel = cell.contentView.viewWithTag(2) as! UILabel
+		let venue = event["venue"] as! PFObject
+		venueLabel.text = "@" + (venue["name"] as! String)
+		return cell
+	}
+	
+	func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+		let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Section", forIndexPath: indexPath) as! UICollectionReusableView
+		let titleLabel = headerView.viewWithTag(1) as! UILabel
+		titleLabel.text = self.allCategories[indexPath.section]
+		return headerView
+	}
+	
+	// MARK: - UICollectionViewDelegate
+	
+	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		println(indexPath)
+	}
+	
 	// MARK: - CLLocationManagerDelegate
 
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {

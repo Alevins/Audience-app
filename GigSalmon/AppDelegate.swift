@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	var selectedDbIndex: Int = 0
+	var eventCategories: Array<String> = ["Rock","Pop", "Folk", "Electronic", "Jazz","World", "Other"]
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Initialize Crashlytics
