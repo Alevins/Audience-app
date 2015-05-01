@@ -387,6 +387,10 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.toggleFilterBar()
 		self.refreshDataSource()
 	}
+	
+	func showEventDetailView() {
+		self.performSegueWithIdentifier("ShowEventDetail", sender: self)
+	}
 
 	// MARK: - MKMapViewDelegate
 	
@@ -481,7 +485,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	// MARK: - UICollectionViewDelegate
 	
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		println(indexPath)
+		self.showEventDetailView()
 	}
 	
 	// MARK: - CLLocationManagerDelegate
@@ -517,6 +521,22 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "EventGlanceSegue" {
 			self.eventGlance = segue.destinationViewController as? GSEventGlance
+			self.eventGlance!.delegate = self
+		} else if segue.identifier == "ShowEventDetail" {
+			let detailNav = segue.destinationViewController as! UINavigationController
+			let detailView = detailNav.topViewController as! GSEventDetail
+			if isCollectionView {
+				let indexPaths = self.collectionView.indexPathsForSelectedItems()
+				let indexPath = indexPaths[0] as! NSIndexPath
+				let category: String = self.allCategories[indexPath.section] as String
+				let arr: Array = self.eventsInCategories[category]!
+				let event: PFObject = arr[indexPath.item] as PFObject
+				detailView.event = event
+			} else {
+				let annotations = self.mapView!.selectedAnnotations
+				let pin = annotations[0] as! GSPinAnnotation
+				detailView.event = pin.event!
+			}
 		}
 	}
 }

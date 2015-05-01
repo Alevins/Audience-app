@@ -12,6 +12,7 @@
 		9A6AC80D1AE1E990006C1A03 /* GSEventGlance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AC80C1AE1E990006C1A03 /* GSEventGlance.swift */; };
 		9A6AC83D1AE49F99006C1A03 /* GSPinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AC83C1AE49F99006C1A03 /* GSPinAnnotation.swift */; };
 		9A6AC83F1AE4A438006C1A03 /* GSPinAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AC83E1AE4A438006C1A03 /* GSPinAnnotationView.swift */; };
+		9A9661BA1AF360D900033165 /* GSEventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9661B91AF360D900033165 /* GSEventDetail.swift */; };
 		9AB3CD901AD4D2570082D2AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */; };
 		9AB3CD981AD4F9700082D2AB /* GoogleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3CD961AD4F9700082D2AB /* GoogleIcon.swift */; };
 		9AB3CD991AD4F9700082D2AB /* googleicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AB3CD971AD4F9700082D2AB /* googleicon.ttf */; };
@@ -64,6 +65,7 @@
 		9A6AC83C1AE49F99006C1A03 /* GSPinAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSPinAnnotation.swift; sourceTree = "<group>"; };
 		9A6AC83E1AE4A438006C1A03 /* GSPinAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSPinAnnotationView.swift; sourceTree = "<group>"; };
 		9A6ED638D8D203C43F0D7FD8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9A9661B91AF360D900033165 /* GSEventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSEventDetail.swift; sourceTree = "<group>"; };
 		9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9AB3CD961AD4F9700082D2AB /* GoogleIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleIcon.swift; sourceTree = "<group>"; };
 		9AB3CD971AD4F9700082D2AB /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = googleicon.ttf; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				9AD82E121AEDFA1F0022BC77 /* GSSelectionMenu.swift */,
 				9A1BCDF51AD94E5500A9D0D1 /* GSFilterPanel.swift */,
 				9A6AC80C1AE1E990006C1A03 /* GSEventGlance.swift */,
+				9A9661B91AF360D900033165 /* GSEventDetail.swift */,
 				9AF5A7011AD39AA200CEC57F /* Images.xcassets */,
 				9AF5A7031AD39AA200CEC57F /* LaunchScreen.xib */,
 				9A1BCDEA1AD784A000A9D0D1 /* GigSalmon-Bridging-Header.h */,
@@ -416,6 +419,7 @@
 				9A6AC83F1AE4A438006C1A03 /* GSPinAnnotationView.swift in Sources */,
 				9AD82E131AEDFA1F0022BC77 /* GSSelectionMenu.swift in Sources */,
 				9AF5A6F91AD39AA200CEC57F /* AppDelegate.swift in Sources */,
+				9A9661BA1AF360D900033165 /* GSEventDetail.swift in Sources */,
 				9AF5A7241AD39E7100CEC57F /* GSMenuTop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

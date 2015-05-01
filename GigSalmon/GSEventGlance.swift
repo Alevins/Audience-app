@@ -11,6 +11,7 @@ import Parse
 
 class GSEventGlance: UIViewController {
 
+	var delegate: AnyObject?
 	@IBOutlet var dateLabel: UILabel!
 	@IBOutlet var titleLabel: UILabel!
 	@IBOutlet var venueLabel: UILabel!
@@ -34,5 +35,14 @@ class GSEventGlance: UIViewController {
 		let venue = param["venue"] as! PFObject
 		self.venueLabel.text = "@" + (venue["name"] as! String)
 		self.descriptionLabel.text = (param["description"] as? String ?? "")
+	}
+	
+	// MARK: - Action
+
+	@IBAction func tapAction(sender: AnyObject) {
+		let delegate = self.delegate as? GSEventTop
+		if ((delegate?.respondsToSelector("showEventDetailView")) != nil) {
+			delegate!.showEventDetailView()
+		}
 	}
 }
