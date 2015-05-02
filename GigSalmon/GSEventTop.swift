@@ -472,6 +472,16 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		let venueLabel = cell.contentView.viewWithTag(2) as! UILabel
 		let venue = event["venue"] as! PFObject
 		venueLabel.text = "@" + (venue["name"] as! String)
+		let imageView = cell.contentView.viewWithTag(3) as! UIImageView
+		let imageFile = event["image"] as! PFFile
+		imageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+			if error == nil {
+				if let imageData = imageData {
+					imageView.image = UIImage(data:imageData)
+				}
+			}
+		}
+
 		return cell
 	}
 	

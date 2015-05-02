@@ -16,6 +16,7 @@ class GSEventDetail: UIViewController {
 	@IBOutlet var venueNameLabel: UILabel!
 	@IBOutlet var eventDescriptionLabel: UILabel!
 	@IBOutlet var venueAddressLabel: UILabel!
+	@IBOutlet var eventImageView: UIImageView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -47,6 +48,15 @@ class GSEventDetail: UIViewController {
 				self.venueAddressLabel.text = placemark.name
 			}
 		})
+		
+		let imageFile = self.event!["image"] as! PFFile
+		imageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+			if error == nil {
+				if let imageData = imageData {
+					self.eventImageView.image = UIImage(data:imageData)
+				}
+			}
+		}
 	}
 
 	override func viewDidAppear(animated: Bool) {

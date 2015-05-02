@@ -79,7 +79,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoImage" translatesAutoresizingMaskIntoConstraints="NO" id="7rA-00-mQH">
+                                                <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoImage" translatesAutoresizingMaskIntoConstraints="NO" id="7rA-00-mQH">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 </imageView>
                                                 <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kws-ts-EWg">
@@ -836,6 +836,7 @@
                     <navigationItem key="navigationItem" id="98I-Eb-Mko"/>
                     <connections>
                         <outlet property="eventDescriptionLabel" destination="JVW-Bj-mSU" id="h0d-ad-fTI"/>
+                        <outlet property="eventImageView" destination="chU-bo-Z6M" id="jjh-8P-grN"/>
                         <outlet property="eventNameLabel" destination="cWh-e7-FMd" id="JVC-rf-K1G"/>
                         <outlet property="venueAddressLabel" destination="uJ7-Li-EuR" id="rDy-La-lrW"/>
                         <outlet property="venueNameLabel" destination="4xS-cF-pSZ" id="mMQ-0D-V1D"/>
