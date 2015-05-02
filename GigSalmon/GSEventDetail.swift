@@ -74,5 +74,12 @@ class GSEventDetail: UIViewController {
 		self.dismissViewControllerAnimated(true, completion: nil)
 	}
 	
+	// MARK: - Segue Navigation
 	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "ShowVenueDetailSegue" {
+			let venueDetail = segue.destinationViewController as! GSVenueDetail
+			venueDetail.venue = self.event!["venue"] as? PFObject
+		}
+	}
 }

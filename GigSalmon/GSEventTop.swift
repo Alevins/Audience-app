@@ -389,7 +389,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	func showEventDetailView() {
-		self.performSegueWithIdentifier("ShowEventDetail", sender: self)
+		self.performSegueWithIdentifier("ShowEventDetailSegue", sender: self)
 	}
 
 	// MARK: - MKMapViewDelegate
@@ -532,7 +532,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		if segue.identifier == "EventGlanceSegue" {
 			self.eventGlance = segue.destinationViewController as? GSEventGlance
 			self.eventGlance!.delegate = self
-		} else if segue.identifier == "ShowEventDetail" {
+		} else if segue.identifier == "ShowEventDetailSegue" {
 			let detailNav = segue.destinationViewController as! UINavigationController
 			let detailView = detailNav.topViewController as! GSEventDetail
 			if isCollectionView {
