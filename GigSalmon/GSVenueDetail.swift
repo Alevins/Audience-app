@@ -29,6 +29,8 @@ class GSVenueDetail: UIViewController {
 		super.viewDidLoad()
 		
 		self.title = "Venue Info"
+		self.aboutButton.backgroundColor = UIColor.orangeColor()
+		
 		if venue != nil {
 			nameLabel.text = self.venue!["name"] as? String
 			let geocoder = CLGeocoder()
@@ -59,18 +61,38 @@ class GSVenueDetail: UIViewController {
 	// MARK: - Action
 
 	@IBAction func tabButtonAction(sender: UIButton) {
+		self.aboutButton.backgroundColor = UIColor.whiteColor()
+		self.locationButton.backgroundColor = UIColor.whiteColor()
+		self.archivesButton.backgroundColor = UIColor.whiteColor()
+		self.upcomingsButton.backgroundColor = UIColor.whiteColor()
 		let transition: CATransition = CATransition()
 		transition.duration = 0.25
 		transition.type = kCATransitionFade
 		self.baseView.layer.addAnimation(transition, forKey: nil)
 		if sender == self.aboutButton {
+			self.aboutButton.backgroundColor = UIColor.orangeColor()
 			self.baseView.bringSubviewToFront(self.aboutView)
 		} else if sender == self.locationButton {
+			self.locationButton.backgroundColor = UIColor.orangeColor()
 			self.baseView.bringSubviewToFront(self.locationView)
 		} else if sender == self.archivesButton {
+			self.archivesButton.backgroundColor = UIColor.orangeColor()
 			self.baseView.bringSubviewToFront(self.archivesView)
 		} else if sender == self.upcomingsButton {
+			self.upcomingsButton.backgroundColor = UIColor.orangeColor()
 			self.baseView.bringSubviewToFront(self.upcomingsView)
+		}
+	}
+	
+	// MARK: - Segue Navigation
+
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "VenueAboutSegue" {
+			let vc = segue.destinationViewController as! GSVenueAbout
+			vc.venue = self.venue
+		} else if segue.identifier == "VenueLocationSegue" {
+			let vc = segue.destinationViewController as! GSVenueLocation
+			vc.venue = self.venue
 		}
 	}
 }

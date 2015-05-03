@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		98790A8185CF2D12D9A87B71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4019CE4D46C3BC206D5493A7 /* libPods.a */; };
 		9A03387E1AF4F112000B8009 /* GSVenueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A03387D1AF4F112000B8009 /* GSVenueDetail.swift */; };
+		9A0338801AF5F908000B8009 /* GSVenueAbout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A03387F1AF5F908000B8009 /* GSVenueAbout.swift */; };
+		9A0338821AF5F91E000B8009 /* GSVenueLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0338811AF5F91E000B8009 /* GSVenueLocation.swift */; };
+		9A0338841AF5F937000B8009 /* GSVenueArchives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0338831AF5F937000B8009 /* GSVenueArchives.swift */; };
+		9A0338861AF5F94C000B8009 /* GSVenueUpcomings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0338851AF5F94C000B8009 /* GSVenueUpcomings.swift */; };
 		9A1BCDF61AD94E5500A9D0D1 /* GSFilterPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1BCDF51AD94E5500A9D0D1 /* GSFilterPanel.swift */; };
 		9A6AC80D1AE1E990006C1A03 /* GSEventGlance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AC80C1AE1E990006C1A03 /* GSEventGlance.swift */; };
 		9A6AC83D1AE49F99006C1A03 /* GSPinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AC83C1AE49F99006C1A03 /* GSPinAnnotation.swift */; };
@@ -61,6 +65,10 @@
 		4019CE4D46C3BC206D5493A7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		417F75571B0AFDB385AA4030 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9A03387D1AF4F112000B8009 /* GSVenueDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSVenueDetail.swift; sourceTree = "<group>"; };
+		9A03387F1AF5F908000B8009 /* GSVenueAbout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSVenueAbout.swift; sourceTree = "<group>"; };
+		9A0338811AF5F91E000B8009 /* GSVenueLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSVenueLocation.swift; sourceTree = "<group>"; };
+		9A0338831AF5F937000B8009 /* GSVenueArchives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSVenueArchives.swift; sourceTree = "<group>"; };
+		9A0338851AF5F94C000B8009 /* GSVenueUpcomings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSVenueUpcomings.swift; sourceTree = "<group>"; };
 		9A1BCDEA1AD784A000A9D0D1 /* GigSalmon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GigSalmon-Bridging-Header.h"; sourceTree = "<group>"; };
 		9A1BCDF51AD94E5500A9D0D1 /* GSFilterPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSFilterPanel.swift; sourceTree = "<group>"; };
 		9A6AC80C1AE1E990006C1A03 /* GSEventGlance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSEventGlance.swift; sourceTree = "<group>"; };
@@ -190,6 +198,10 @@
 				9A6AC80C1AE1E990006C1A03 /* GSEventGlance.swift */,
 				9A9661B91AF360D900033165 /* GSEventDetail.swift */,
 				9A03387D1AF4F112000B8009 /* GSVenueDetail.swift */,
+				9A03387F1AF5F908000B8009 /* GSVenueAbout.swift */,
+				9A0338811AF5F91E000B8009 /* GSVenueLocation.swift */,
+				9A0338831AF5F937000B8009 /* GSVenueArchives.swift */,
+				9A0338851AF5F94C000B8009 /* GSVenueUpcomings.swift */,
 				9AF5A7011AD39AA200CEC57F /* Images.xcassets */,
 				9AF5A7031AD39AA200CEC57F /* LaunchScreen.xib */,
 				9A1BCDEA1AD784A000A9D0D1 /* GigSalmon-Bridging-Header.h */,
@@ -414,13 +426,17 @@
 				9AF5A71E1AD39E1F00CEC57F /* GSMusicianTop.swift in Sources */,
 				9A1BCDF61AD94E5500A9D0D1 /* GSFilterPanel.swift in Sources */,
 				9AF5A7201AD39E3600CEC57F /* GSEventTop.swift in Sources */,
+				9A0338841AF5F937000B8009 /* GSVenueArchives.swift in Sources */,
 				9AF5A7221AD39E4C00CEC57F /* GSVenueTop.swift in Sources */,
 				9A03387E1AF4F112000B8009 /* GSVenueDetail.swift in Sources */,
 				9A6AC80D1AE1E990006C1A03 /* GSEventGlance.swift in Sources */,
+				9A0338821AF5F91E000B8009 /* GSVenueLocation.swift in Sources */,
+				9A0338801AF5F908000B8009 /* GSVenueAbout.swift in Sources */,
 				9A6AC83D1AE49F99006C1A03 /* GSPinAnnotation.swift in Sources */,
 				9AD82E111AEDF4AC0022BC77 /* GSMenuSettings.swift in Sources */,
 				9AB3CD981AD4F9700082D2AB /* GoogleIcon.swift in Sources */,
 				9A6AC83F1AE4A438006C1A03 /* GSPinAnnotationView.swift in Sources */,
+				9A0338861AF5F94C000B8009 /* GSVenueUpcomings.swift in Sources */,
 				9AD82E131AEDFA1F0022BC77 /* GSSelectionMenu.swift in Sources */,
 				9AF5A6F91AD39AA200CEC57F /* AppDelegate.swift in Sources */,
 				9A9661BA1AF360D900033165 /* GSEventDetail.swift in Sources */,
