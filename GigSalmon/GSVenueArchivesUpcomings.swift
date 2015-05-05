@@ -1,5 +1,5 @@
 //
-//  GSVenueArchives.swift
+//  GSVenueArchivesUpcomings.swift
 //  GigSalmon
 //
 //  Created by tnk on 2015/05/03.
@@ -9,9 +9,10 @@
 import UIKit
 import Parse
 
-class GSVenueArchives: UIViewController {
+class GSVenueArchivesUpcomings: UIViewController {
 
 	var venue: PFObject?
+	var isArchives: Bool = false
 	@IBOutlet weak var collectionView: UICollectionView!
 	var currentDate: NSDate! = NSDate()
 	var allMonths: [String] = []
@@ -25,9 +26,14 @@ class GSVenueArchives: UIViewController {
 		let today = calendar?.dateFromComponents(comps!)
 
 		var query = PFQuery(className: "Events")
-		query.whereKey("date", lessThan: today!)
 		query.whereKey("venue", equalTo: venue!)
+		if isArchives {
+			query.whereKey("date", lessThan: today!)
+		} else {
+			query.whereKey("date", greaterThanOrEqualTo: today!)
+		}
 		query.addDescendingOrder("date")
+		query.includeKey("venue")
 		query.findObjectsInBackgroundWithBlock( { (NSArray objects, NSError error) in
 			if error != nil {
 				println("query failed")
@@ -42,13 +48,13 @@ class GSVenueArchives: UIViewController {
 							self.eventsInMonths[months] = []
 						}
 						self.eventsInMonths[months]!.append(event)
-						self.allMonths.append(months)
+						if find(self.allMonths, months) == nil {
+							self.allMonths.append(months)
+						}
 					}
 				}
 			}
-			println("allMonths:\(self.allMonths)")
-			println("eventsInMonths:\(self.eventsInMonths)")
-//			self.collectionView.reloadData()
+			self.collectionView.reloadData()
 		})
 	}
 
@@ -59,16 +65,11 @@ class GSVenueArchives: UIViewController {
 	// MARK: - UICollectionViewDataSource
 	
 	func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-		println("section:\(eventsInMonths.count)")
-//		return eventsInMonths.count
-		return 0
+		return allMonths.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//		println("allMonths:\(self.allMonths)")
-//		println("items:\(eventsInMonths[self.allMonths[section]]!.count))")
-//		return eventsInMonths[self.allMonths[section]]!.count
-		return 0
+		return eventsInMonths[self.allMonths[section]]!.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -78,9 +79,6 @@ class GSVenueArchives: UIViewController {
 		let event: PFObject = arr[indexPath.item] as PFObject
 		let nameLabel = cell.contentView.viewWithTag(1) as! UILabel
 		nameLabel.text = event["title"] as? String
-		let venueLabel = cell.contentView.viewWithTag(2) as! UILabel
-		let venue = event["venue"] as! PFObject
-		venueLabel.text = "@" + (venue["name"] as! String)
 		let imageView = cell.contentView.viewWithTag(3) as! UIImageView
 		let imageFile = event["image"] as! PFFile
 		imageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in

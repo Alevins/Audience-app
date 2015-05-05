@@ -93,6 +93,10 @@ class GSVenueDetail: UIViewController {
 		} else if segue.identifier == "VenueLocationSegue" {
 			let vc = segue.destinationViewController as! GSVenueLocation
 			vc.venue = self.venue
+		} else if segue.identifier == "VenueArchivesSegue" || segue.identifier == "VenueUpcomingsSegue" {
+			let vc = segue.destinationViewController as! GSVenueArchivesUpcomings
+			vc.venue = self.venue
+			vc.isArchives = segue.identifier == "VenueArchivesSegue"
 		}
 	}
 }
