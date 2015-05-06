@@ -533,8 +533,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			self.eventGlance = segue.destinationViewController as? GSEventGlance
 			self.eventGlance!.delegate = self
 		} else if segue.identifier == "ShowEventDetailSegue" {
-			let detailNav = segue.destinationViewController as! UINavigationController
-			let detailView = detailNav.topViewController as! GSEventDetail
+			let detailView = segue.destinationViewController as! GSEventDetail
 			if isCollectionView {
 				let indexPaths = self.collectionView.indexPathsForSelectedItems()
 				let indexPath = indexPaths[0] as! NSIndexPath

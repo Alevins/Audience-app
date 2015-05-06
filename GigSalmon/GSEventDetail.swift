@@ -21,14 +21,6 @@ class GSEventDetail: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let cancelButton = UIButton(frame: CGRectMake(0, 0, 28, 28))
-		cancelButton.titleLabel?.font = UIFont(name: GoogleIconName, size: 28.0)
-		cancelButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-		cancelButton.setTitle(GoogleIcon.ebce, forState:.Normal)
-		cancelButton.showsTouchWhenHighlighted = true
-		cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: .TouchUpInside)
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
-		
 		let date = self.event!["date"] as! NSDate
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "MMMdd HH:mm"
@@ -69,10 +61,6 @@ class GSEventDetail: UIViewController {
 	}
 
 	// MARK: - Action
-	
-	func cancelAction(sender: UIBarButtonItem) {
-		self.dismissViewControllerAnimated(true, completion: nil)
-	}
 	
 	// MARK: - Segue Navigation
 	
