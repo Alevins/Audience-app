@@ -12,11 +12,13 @@ import Parse
 class GSEventDetail: UIViewController {
 
 	var event: PFObject?
-	@IBOutlet var eventNameLabel: UILabel!
-	@IBOutlet var venueNameLabel: UILabel!
-	@IBOutlet var eventDescriptionLabel: UILabel!
-	@IBOutlet var venueAddressLabel: UILabel!
-	@IBOutlet var eventImageView: UIImageView!
+	@IBOutlet weak var scrollView: UIScrollView!
+	@IBOutlet weak var eventNameLabel: UILabel!
+	@IBOutlet weak var venueNameLabel: UILabel!
+	@IBOutlet weak var eventDescriptionLabel: UILabel!
+	@IBOutlet weak var venueAddressLabel: UILabel!
+	@IBOutlet weak var eventImageView: UIImageView!
+	@IBOutlet weak var contentBaseView: UIView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -54,6 +56,10 @@ class GSEventDetail: UIViewController {
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
+	}
+	
+	override func viewDidLayoutSubviews() {
+		self.scrollView.contentSize = self.contentBaseView.frame.size
 	}
 	
 	override func didReceiveMemoryWarning() {
