@@ -65,6 +65,11 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.mapView.addSubview(currentLocationButton!)
 	}
 	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		self.navigationController!.view.viewWithTag(10)!.hidden = false
+	}
+	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		NSUserDefaults().setInteger(1, forKey: "selectedTabIndex")
@@ -89,7 +94,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.filterDeleteButton!.frame = CGRectMake(screenBounds.size.width - 30 - 12, 3, 30, 30)
 
 		let glanceHeight: CGFloat = self.mapView!.selectedAnnotations != nil && self.mapView!.selectedAnnotations.count > 0 ? 120 : 0
-		self.eventGlanceContainer.frame = CGRectMake(0, screenBounds.size.height - glanceHeight - self.tabBarHeight, screenBounds.size.width, glanceHeight)
+		self.eventGlanceContainer.frame = CGRectMake(0, screenBounds.size.height - glanceHeight - self.tabBarHeight - dateBarHeight, screenBounds.size.width, glanceHeight)
 
 		self.currentLocationButton!.frame = CGRectMake(screenBounds.size.width - 32 - 12, screenBounds.size.height - tabBarHeight - dateBarHeight - 32 - 12, 32, 32)
 
@@ -135,6 +140,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	func setupDateBar() {
 		let effect = UIBlurEffect(style: .Dark)
 		self.dateBarView = UIVisualEffectView(effect: effect)
+		self.dateBarView!.tag = 10
 		self.navigationController!.view.addSubview(self.dateBarView!)
 		
 		// date label
@@ -217,8 +223,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		let screenBounds = UIScreen.mainScreen().bounds
 		let glanceHeight: CGFloat = self.mapView!.selectedAnnotations != nil && self.mapView!.selectedAnnotations.count > 0 ? 120 : 0
 		UIView.animateWithDuration(0.25, animations: { () -> Void in
-			self.eventGlanceContainer.frame = CGRectMake(0, screenBounds.size.height - glanceHeight - self.tabBarHeight, screenBounds.size.width, glanceHeight)
-			self.dateBarView!.hidden = glanceHeight != 0
+			self.eventGlanceContainer.frame = CGRectMake(0, screenBounds.size.height - glanceHeight - self.tabBarHeight - self.dateBarView!.frame.size.height, screenBounds.size.width, glanceHeight)
 		})
 	}
 	

@@ -53,9 +53,9 @@ class GSEventDetail: UIViewController {
 		}
 	}
 
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
-		
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		self.navigationController!.view.viewWithTag(10)!.hidden = true
 	}
 	
 	override func viewDidLayoutSubviews() {
