@@ -890,6 +890,48 @@
             </objects>
             <point key="canvasLocation" x="3126" y="367"/>
         </scene>
+        <!--Show Image-->
+        <scene sceneID="WmG-zg-v0M">
+            <objects>
+                <viewController id="etE-fc-28H" customClass="GSShowImage" customModule="GigSalmon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ANl-Ie-b4p"/>
+                        <viewControllerLayoutGuide type="bottom" id="2GZ-dh-V2j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oGc-D0-TdS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ItG-fA-sH1">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="b8X-GC-vDP" appends="YES" id="lo0-Bv-rVW"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ItG-fA-sH1" secondAttribute="trailing" id="9Zt-cU-XNW"/>
+                            <constraint firstItem="2GZ-dh-V2j" firstAttribute="top" secondItem="ItG-fA-sH1" secondAttribute="bottom" id="BoZ-TF-uLw"/>
+                            <constraint firstItem="ItG-fA-sH1" firstAttribute="top" secondItem="oGc-D0-TdS" secondAttribute="top" id="TSd-wc-gHU"/>
+                            <constraint firstItem="ItG-fA-sH1" firstAttribute="leading" secondItem="oGc-D0-TdS" secondAttribute="leading" id="vXP-ba-9ef"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="ItG-fA-sH1" id="MhA-GB-coQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FZZ-e0-1f5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="b8X-GC-vDP">
+                    <connections>
+                        <action selector="tapAction:" destination="etE-fc-28H" id="MgG-7o-1gl"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="3941" y="-320"/>
+        </scene>
         <!--Venue Detail-->
         <scene sceneID="VxY-Pq-4ws">
             <objects>
@@ -1090,11 +1132,50 @@
                         <outlet property="nameLabel" destination="gtk-G8-C9A" id="9sJ-5f-ZIG"/>
                         <outlet property="upcomingsButton" destination="oio-8b-8rU" id="A56-5Q-LJ9"/>
                         <outlet property="upcomingsView" destination="b5U-TE-BHy" id="aUC-cn-5o8"/>
+                        <segue destination="etE-fc-28H" kind="presentation" identifier="ShowImageSegue" modalTransitionStyle="crossDissolve" id="YbB-Qe-86c"/>
+                        <segue destination="0Xf-fk-ahH" kind="presentation" identifier="ShowVideoSegue" modalTransitionStyle="crossDissolve" id="qVL-JX-qcc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSp-AV-Cxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3941" y="367"/>
+        </scene>
+        <!--Show Video-->
+        <scene sceneID="tYd-Fi-Djr">
+            <objects>
+                <viewController id="s6n-U2-hhB" customClass="GSShowVideo" customModule="GigSalmon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zIY-K3-0ck"/>
+                        <viewControllerLayoutGuide type="bottom" id="wEJ-RA-RK5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5CB-rB-E4p">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3X-Uk-ze2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="s6n-U2-hhB" id="Bv3-8o-svP"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wEJ-RA-RK5" firstAttribute="top" secondItem="a3X-Uk-ze2" secondAttribute="bottom" id="9Iy-bc-d2F"/>
+                            <constraint firstItem="a3X-Uk-ze2" firstAttribute="top" secondItem="5CB-rB-E4p" secondAttribute="top" id="Gb9-Z9-ZrS"/>
+                            <constraint firstAttribute="trailing" secondItem="a3X-Uk-ze2" secondAttribute="trailing" id="d2U-xx-q9v"/>
+                            <constraint firstItem="a3X-Uk-ze2" firstAttribute="leading" secondItem="5CB-rB-E4p" secondAttribute="leading" id="dPP-Ce-7IH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="uQ3-t9-JHi"/>
+                    <connections>
+                        <outlet property="webView" destination="a3X-Uk-ze2" id="8O1-6j-OzG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iAN-AU-GXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5575" y="-320"/>
         </scene>
         <!--Venue About-->
         <scene sceneID="0LL-nH-BC5">
@@ -1118,7 +1199,7 @@
                                     <outletCollection property="gestureRecognizers" destination="xqc-Mi-TL0" appends="YES" id="Gch-mI-y4U"/>
                                 </connections>
                             </imageView>
-                            <imageView clipsSubviews="YES" tag="20" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoImage" translatesAutoresizingMaskIntoConstraints="NO" id="GNA-ya-dGn">
+                            <imageView clipsSubviews="YES" tag="11" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoImage" translatesAutoresizingMaskIntoConstraints="NO" id="GNA-ya-dGn">
                                 <rect key="frame" x="200" y="0.0" width="200" height="100"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -1128,7 +1209,7 @@
                                     <outletCollection property="gestureRecognizers" destination="sC0-Ws-3D3" appends="YES" id="JG0-BD-GMA"/>
                                 </connections>
                             </imageView>
-                            <imageView clipsSubviews="YES" tag="30" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoImage" translatesAutoresizingMaskIntoConstraints="NO" id="2Ag-hu-KOk">
+                            <imageView clipsSubviews="YES" tag="12" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoImage" translatesAutoresizingMaskIntoConstraints="NO" id="2Ag-hu-KOk">
                                 <rect key="frame" x="400" y="0.0" width="200" height="100"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -1151,14 +1232,14 @@
                                     <constraint firstAttribute="width" constant="40" id="shK-RD-607"/>
                                 </constraints>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" tag="120" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlayVideo" translatesAutoresizingMaskIntoConstraints="NO" id="dJf-7h-ZkT">
+                            <imageView hidden="YES" userInteractionEnabled="NO" tag="111" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlayVideo" translatesAutoresizingMaskIntoConstraints="NO" id="dJf-7h-ZkT">
                                 <rect key="frame" x="280" y="30" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="0Vr-Fs-EeA"/>
                                     <constraint firstAttribute="height" constant="40" id="QRf-4z-YRJ"/>
                                 </constraints>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" tag="130" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlayVideo" translatesAutoresizingMaskIntoConstraints="NO" id="9Ur-9M-3X1">
+                            <imageView hidden="YES" userInteractionEnabled="NO" tag="112" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlayVideo" translatesAutoresizingMaskIntoConstraints="NO" id="9Ur-9M-3X1">
                                 <rect key="frame" x="480" y="30" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="G69-qy-T6u"/>
@@ -1495,6 +1576,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ed-ro-DSc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4763" y="1347"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GHq-vi-9I2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Xf-fk-ahH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RWn-un-SRx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="s6n-U2-hhB" kind="relationship" relationship="rootViewController" id="kFX-ig-FBL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zLv-gr-8Wd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4763" y="-320"/>
         </scene>
     </scenes>
     <resources>

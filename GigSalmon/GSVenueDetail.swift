@@ -84,12 +84,23 @@ class GSVenueDetail: UIViewController {
 		}
 	}
 	
+	// MARK: - DelegateMethods
+	
+	func showImageViewWithImage(image: UIImage!) {
+		self.performSegueWithIdentifier("ShowImageSegue", sender: image)
+	}
+	
+	func showVideoViewWithId(videoId: String) {
+		self.performSegueWithIdentifier("ShowVideoSegue", sender: videoId)
+	}
+	
 	// MARK: - Segue Navigation
 
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "VenueAboutSegue" {
 			let vc = segue.destinationViewController as! GSVenueAbout
 			vc.venue = self.venue
+			vc.delegate = self
 		} else if segue.identifier == "VenueLocationSegue" {
 			let vc = segue.destinationViewController as! GSVenueLocation
 			vc.venue = self.venue
@@ -97,6 +108,13 @@ class GSVenueDetail: UIViewController {
 			let vc = segue.destinationViewController as! GSVenueArchivesUpcomings
 			vc.venue = self.venue
 			vc.isArchives = segue.identifier == "VenueArchivesSegue"
+		} else if segue.identifier == "ShowImageSegue" {
+			let vc = segue.destinationViewController as! GSShowImage
+			vc.image = (sender as! UIImage)
+		} else if segue.identifier == "ShowVideoSegue" {
+			let nav = segue.destinationViewController as! UINavigationController
+			let vc = nav.topViewController as! GSShowVideo
+			vc.videoId = (sender as! String)
 		}
 	}
 }

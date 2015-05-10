@@ -10,6 +10,8 @@ import UIKit
 import Parse
 
 class GSVenueAbout: UIViewController {
+	
+	var delegate: AnyObject?
 	var venue: PFObject?
 	@IBOutlet weak var imageView0: UIImageView!
 	@IBOutlet weak var imageView1: UIImageView!
@@ -84,11 +86,18 @@ class GSVenueAbout: UIViewController {
 	@IBAction func thumbTapAction(sender: UITapGestureRecognizer) {
 		let tag = sender.view!.tag
 		if self.view.viewWithTag(tag + 100)!.hidden {
-			let sourceView = sender.view as! UIImageView
-			let sourceImage = sourceView.image
+			let imageFile = self.venue!["aboutImage\(tag - 10)"] as? PFFile
+			if imageFile != nil {
+				let sourceView = sender.view as! UIImageView
+				let sourceImage = sourceView.image
+				(delegate as! GSVenueDetail).showImageViewWithImage(sourceImage!)
+			}
 		} else {
 			let columnName = "aboutVideo\(tag - 10)"
 			let videoId = venue![columnName] as? String
+			if videoId != nil {
+				(delegate as! GSVenueDetail).showVideoViewWithId(videoId!)
+			}
 		}
 	}
 }

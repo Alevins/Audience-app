@@ -13,6 +13,9 @@
 		9A0338821AF5F91E000B8009 /* GSVenueLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0338811AF5F91E000B8009 /* GSVenueLocation.swift */; };
 		9A0338841AF5F937000B8009 /* GSVenueArchivesUpcomings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0338831AF5F937000B8009 /* GSVenueArchivesUpcomings.swift */; };
 		9A1BCDF61AD94E5500A9D0D1 /* GSFilterPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1BCDF51AD94E5500A9D0D1 /* GSFilterPanel.swift */; };
+		9A56BD401AFF6AE5004E5BAE /* GSShowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56BD3F1AFF6AE5004E5BAE /* GSShowImage.swift */; };
+		9A56BD441AFF7546004E5BAE /* GSShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56BD431AFF7546004E5BAE /* GSShowVideo.swift */; };
+		9A56BD461AFF7C69004E5BAE /* YouTubePlayer.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A56BD451AFF7C69004E5BAE /* YouTubePlayer.html */; };
 		9A6AC80D1AE1E990006C1A03 /* GSEventGlance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AC80C1AE1E990006C1A03 /* GSEventGlance.swift */; };
 		9A6AC83D1AE49F99006C1A03 /* GSPinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AC83C1AE49F99006C1A03 /* GSPinAnnotation.swift */; };
 		9A6AC83F1AE4A438006C1A03 /* GSPinAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AC83E1AE4A438006C1A03 /* GSPinAnnotationView.swift */; };
@@ -69,6 +72,9 @@
 		9A0338831AF5F937000B8009 /* GSVenueArchivesUpcomings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSVenueArchivesUpcomings.swift; sourceTree = "<group>"; };
 		9A1BCDEA1AD784A000A9D0D1 /* GigSalmon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GigSalmon-Bridging-Header.h"; sourceTree = "<group>"; };
 		9A1BCDF51AD94E5500A9D0D1 /* GSFilterPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSFilterPanel.swift; sourceTree = "<group>"; };
+		9A56BD3F1AFF6AE5004E5BAE /* GSShowImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSShowImage.swift; sourceTree = "<group>"; };
+		9A56BD431AFF7546004E5BAE /* GSShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSShowVideo.swift; sourceTree = "<group>"; };
+		9A56BD451AFF7C69004E5BAE /* YouTubePlayer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = YouTubePlayer.html; sourceTree = "<group>"; };
 		9A6AC80C1AE1E990006C1A03 /* GSEventGlance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSEventGlance.swift; sourceTree = "<group>"; };
 		9A6AC83C1AE49F99006C1A03 /* GSPinAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSPinAnnotation.swift; sourceTree = "<group>"; };
 		9A6AC83E1AE4A438006C1A03 /* GSPinAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSPinAnnotationView.swift; sourceTree = "<group>"; };
@@ -199,9 +205,12 @@
 				9A03387F1AF5F908000B8009 /* GSVenueAbout.swift */,
 				9A0338811AF5F91E000B8009 /* GSVenueLocation.swift */,
 				9A0338831AF5F937000B8009 /* GSVenueArchivesUpcomings.swift */,
+				9A56BD3F1AFF6AE5004E5BAE /* GSShowImage.swift */,
+				9A56BD431AFF7546004E5BAE /* GSShowVideo.swift */,
 				9AF5A7011AD39AA200CEC57F /* Images.xcassets */,
 				9AF5A7031AD39AA200CEC57F /* LaunchScreen.xib */,
 				9A1BCDEA1AD784A000A9D0D1 /* GigSalmon-Bridging-Header.h */,
+				9A56BD451AFF7C69004E5BAE /* YouTubePlayer.html */,
 				9AF5A6F61AD39AA200CEC57F /* Supporting Files */,
 			);
 			path = GigSalmon;
@@ -357,6 +366,7 @@
 				9AF5A7001AD39AA200CEC57F /* Main.storyboard in Resources */,
 				9AF5A7051AD39AA200CEC57F /* LaunchScreen.xib in Resources */,
 				9AF5A7021AD39AA200CEC57F /* Images.xcassets in Resources */,
+				9A56BD461AFF7C69004E5BAE /* YouTubePlayer.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,8 +438,10 @@
 				9A03387E1AF4F112000B8009 /* GSVenueDetail.swift in Sources */,
 				9A6AC80D1AE1E990006C1A03 /* GSEventGlance.swift in Sources */,
 				9A0338821AF5F91E000B8009 /* GSVenueLocation.swift in Sources */,
+				9A56BD401AFF6AE5004E5BAE /* GSShowImage.swift in Sources */,
 				9A0338801AF5F908000B8009 /* GSVenueAbout.swift in Sources */,
 				9A6AC83D1AE49F99006C1A03 /* GSPinAnnotation.swift in Sources */,
+				9A56BD441AFF7546004E5BAE /* GSShowVideo.swift in Sources */,
 				9AD82E111AEDF4AC0022BC77 /* GSMenuSettings.swift in Sources */,
 				9AB3CD981AD4F9700082D2AB /* GoogleIcon.swift in Sources */,
 				9A6AC83F1AE4A438006C1A03 /* GSPinAnnotationView.swift in Sources */,
