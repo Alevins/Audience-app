@@ -12,10 +12,10 @@ import Parse
 class GSEventGlance: UIViewController {
 
 	var delegate: AnyObject?
-	@IBOutlet var dateLabel: UILabel!
-	@IBOutlet var titleLabel: UILabel!
-	@IBOutlet var venueLabel: UILabel!
-	@IBOutlet var descriptionLabel: UILabel!
+	@IBOutlet weak var dateLabel: UILabel!
+	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var venueLabel: UILabel!
+	@IBOutlet weak var descriptionLabel: UILabel!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

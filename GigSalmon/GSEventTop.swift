@@ -12,9 +12,9 @@ import MapKit
 import Parse
 
 class GSEventTop: UIViewController, CLLocationManagerDelegate {
-	@IBOutlet var mapView: MKMapView!
-	@IBOutlet var collectionView: UICollectionView!
-	@IBOutlet var eventGlanceContainer: UIView!
+	@IBOutlet weak var mapView: MKMapView!
+	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var eventGlanceContainer: UIView!
 	var currentLocationButton: UIButton?
 	var eventGlance: GSEventGlance?
 	var distanceLabel: UILabel?

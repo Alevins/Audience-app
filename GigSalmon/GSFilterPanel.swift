@@ -11,8 +11,8 @@ import UIKit
 class GSFilterPanel: UITableViewController {
 
 	var delegate: AnyObject?
-	@IBOutlet var textField: UITextField!
-	@IBOutlet var pickerView: UIPickerView!
+	@IBOutlet weak var textField: UITextField!
+	@IBOutlet weak var pickerView: UIPickerView!
 	var categories: [String] = []
 	var keyword: String?
 	var category: String?

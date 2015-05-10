@@ -12,18 +12,18 @@ import Parse
 class GSVenueDetail: UIViewController {
 	
 	var venue: PFObject?
-	@IBOutlet var imageView: UIImageView!
-	@IBOutlet var nameLabel: UILabel!
-	@IBOutlet var locationLabel: UILabel!
-	@IBOutlet var aboutButton: UIButton!
-	@IBOutlet var locationButton: UIButton!
-	@IBOutlet var archivesButton: UIButton!
-	@IBOutlet var upcomingsButton: UIButton!
-	@IBOutlet var baseView: UIView!
-	@IBOutlet var aboutView: UIView!
-	@IBOutlet var locationView: UIView!
-	@IBOutlet var archivesView: UIView!
-	@IBOutlet var upcomingsView: UIView!
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var locationLabel: UILabel!
+	@IBOutlet weak var aboutButton: UIButton!
+	@IBOutlet weak var locationButton: UIButton!
+	@IBOutlet weak var archivesButton: UIButton!
+	@IBOutlet weak var upcomingsButton: UIButton!
+	@IBOutlet weak var baseView: UIView!
+	@IBOutlet weak var aboutView: UIView!
+	@IBOutlet weak var locationView: UIView!
+	@IBOutlet weak var archivesView: UIView!
+	@IBOutlet weak var upcomingsView: UIView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
