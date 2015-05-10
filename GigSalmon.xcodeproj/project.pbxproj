@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		98790A8185CF2D12D9A87B71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4019CE4D46C3BC206D5493A7 /* libPods.a */; };
+		6643AEE29AAEF48323053BCA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E5F7375DFDB9CD9C603FA4 /* libPods.a */; };
 		9A03387E1AF4F112000B8009 /* GSVenueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A03387D1AF4F112000B8009 /* GSVenueDetail.swift */; };
 		9A0338801AF5F908000B8009 /* GSVenueAbout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A03387F1AF5F908000B8009 /* GSVenueAbout.swift */; };
 		9A0338821AF5F91E000B8009 /* GSVenueLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0338811AF5F91E000B8009 /* GSVenueLocation.swift */; };
@@ -61,7 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4019CE4D46C3BC206D5493A7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		16E5F7375DFDB9CD9C603FA4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		417F75571B0AFDB385AA4030 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9A03387D1AF4F112000B8009 /* GSVenueDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSVenueDetail.swift; sourceTree = "<group>"; };
 		9A03387F1AF5F908000B8009 /* GSVenueAbout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSVenueAbout.swift; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 				9AF2BB111AE0D3B0007BE97A /* Parse.framework in Frameworks */,
 				9AF2BB101AE0D3B0007BE97A /* Bolts.framework in Frameworks */,
 				9AB3CD9E1AD559F90082D2AB /* Fabric.framework in Frameworks */,
-				98790A8185CF2D12D9A87B71 /* libPods.a in Frameworks */,
+				6643AEE29AAEF48323053BCA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +253,7 @@
 				9AB3CD9C1AD559F90082D2AB /* Fabric.framework */,
 				9AB3CD8F1AD4D2570082D2AB /* CoreLocation.framework */,
 				9AF5A71A1AD39D5A00CEC57F /* MapKit.framework */,
-				4019CE4D46C3BC206D5493A7 /* libPods.a */,
+				16E5F7375DFDB9CD9C603FA4 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

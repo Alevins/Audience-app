@@ -18,20 +18,6 @@ class GSVenueLocation: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-/*		if venue != nil {
-			let venueLocation = venue!["location"] as! PFGeoPoint
-			let location = CLLocation(latitude: venueLocation.latitude, longitude: venueLocation.longitude)
-			let pin: MKPointAnnotation = MKPointAnnotation()
-			pin.coordinate = CLLocationCoordinate2DMake(venueLocation.latitude, venueLocation.longitude)
-			self.mapView.addAnnotation(pin)
-			
-			var region = self.mapView.region
-			region.center = pin.coordinate
-			region.span.latitudeDelta = 0.01
-			region.span.longitudeDelta = 0.01
-			self.mapView.setRegion(self.mapView.regionThatFits(region), animated: false)
-		}*/
 	}
 	
 	override func viewWillAppear(animated: Bool) {

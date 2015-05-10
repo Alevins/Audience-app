@@ -11,5 +11,6 @@
 
 #import "MZFormSheetController.h"
 #import "ActionSheetPicker.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #endif
