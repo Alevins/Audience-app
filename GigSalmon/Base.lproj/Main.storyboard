@@ -652,7 +652,7 @@
         <!--Event Detail-->
         <scene sceneID="YbC-YQ-72O">
             <objects>
-                <viewController id="QeC-9j-ODu" customClass="GSEventDetail" customModule="GigSalmon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="QeC-9j-ODu" customClass="GSEventDetail" customModule="GigSalmon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ClS-e8-164"/>
                         <viewControllerLayoutGuide type="bottom" id="z5Z-TV-jCU"/>
@@ -876,9 +876,6 @@
                     <navigationItem key="navigationItem" id="98I-Eb-Mko"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="automaticallyAdjustsScrollViewInsets" value="NO"/>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="contentBaseView" destination="iqc-oS-zKc" id="zY1-f7-DQv"/>
                         <outlet property="eventDescriptionLabel" destination="JVW-Bj-mSU" id="h0d-ad-fTI"/>
