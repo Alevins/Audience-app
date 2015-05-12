@@ -41,6 +41,9 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 
 		let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		self.allCategories = appDelegate.eventCategories
+		for category in self.allCategories {
+			eventsInCategories[category] = []
+		}
 
 		self.setupNavBarButtons()
 		self.setupFilterBar()
@@ -242,11 +245,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		if (!self.isRegionChanged) {
 			return
 		}
-		
-		self.mapView.removeAnnotations(self.mapView.annotations)
-		for category in self.allCategories {
-			eventsInCategories[category] = []
-		}
 
 		let southwestPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(0, CGRectGetMaxY(mapView.bounds)), toCoordinateFromView: mapView!)
 		let northeastPoint: CLLocationCoordinate2D = mapView.convertPoint(CGPointMake(CGRectGetMaxX(mapView.bounds), 0), toCoordinateFromView: mapView!)
@@ -275,13 +273,49 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 				println("query failed")
 			} else {
 				if let events = objects as? [PFObject] {
+					// removal
+					for category in self.allCategories {
+						let oldEvents = self.eventsInCategories[category]! as [PFObject]
+						for var i = 0; i < oldEvents.count; i++ {
+							var j = 0
+							for ; j < events.count; j++ {
+								if (oldEvents[i]["identifier"] as! String) == (events[j]["identifier"] as! String) {
+									break
+								}
+							}
+							if j == events.count {
+								self.eventsInCategories[category]!.removeAtIndex(i)
+								for annon in self.mapView.annotations {
+									if annon is MKUserLocation {
+										continue
+									}
+									let e: PFObject = (annon as! GSPinAnnotation).event!
+									if (e["identifier"] as! String) == (oldEvents[i]["identifier"] as! String) {
+										self.mapView.removeAnnotation(annon as! GSPinAnnotation)
+										break
+									}
+								}
+							}
+						}
+					}
+					// append
 					for event in events {
 						let category = event["category"] as! String
-						if find(self.allCategories, category) != nil {
-							self.eventsInCategories[category]!.append(event)
+						if find(self.allCategories, category) == nil {
+							continue
 						}
-						let pin: GSPinAnnotation = GSPinAnnotation(event: event)
-						self.mapView.addAnnotation(pin)
+						let oldEvents = self.eventsInCategories[category]! as [PFObject]
+						var i = 0
+						for ; i < oldEvents.count; i++ {
+							if (oldEvents[i]["identifier"] as! String) == (event["identifier"] as! String) {
+								break
+							}
+						}
+						if i == oldEvents.count {
+							self.eventsInCategories[category]!.append(event)
+							let pin: GSPinAnnotation = GSPinAnnotation(event: event)
+							self.mapView.addAnnotation(pin)
+						}
 					}
 				}
 			}
