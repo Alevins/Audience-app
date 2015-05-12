@@ -890,6 +890,39 @@
             </objects>
             <point key="canvasLocation" x="3126" y="367"/>
         </scene>
+        <!--Show Web-->
+        <scene sceneID="jbZ-7f-pa3">
+            <objects>
+                <viewController id="yur-tf-jBM" customClass="GSShowWeb" customModule="GigSalmon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nOT-Xm-8Lg"/>
+                        <viewControllerLayoutGuide type="bottom" id="F46-vI-Upe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9MZ-Fe-kvj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBN-gb-dTu">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="TBN-gb-dTu" secondAttribute="trailing" id="BTU-3d-Dnt"/>
+                            <constraint firstAttribute="bottom" secondItem="TBN-gb-dTu" secondAttribute="bottom" id="mzs-eP-OgL"/>
+                            <constraint firstItem="TBN-gb-dTu" firstAttribute="leading" secondItem="9MZ-Fe-kvj" secondAttribute="leading" id="ncL-zh-w0Z"/>
+                            <constraint firstItem="TBN-gb-dTu" firstAttribute="top" secondItem="9MZ-Fe-kvj" secondAttribute="top" id="t0z-ha-PD1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="TBN-gb-dTu" id="WX6-q9-huj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ind-O5-urR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3941" y="-1010"/>
+        </scene>
         <!--Show Image-->
         <scene sceneID="WmG-zg-v0M">
             <objects>
@@ -1161,6 +1194,7 @@
                         <outlet property="upcomingsView" destination="b5U-TE-BHy" id="aUC-cn-5o8"/>
                         <segue destination="etE-fc-28H" kind="presentation" identifier="ShowImageSegue" modalTransitionStyle="crossDissolve" id="YbB-Qe-86c"/>
                         <segue destination="0Xf-fk-ahH" kind="presentation" identifier="ShowVideoSegue" modalTransitionStyle="crossDissolve" id="qVL-JX-qcc"/>
+                        <segue destination="yur-tf-jBM" kind="show" identifier="ShowWebSegue" id="IVE-5x-bfz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSp-AV-Cxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1282,6 +1316,9 @@
                                 <state key="normal" title="Web Site">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="showWebSiteAction:" destination="fsx-wS-Qfe" eventType="touchUpInside" id="lhS-sa-diP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -94,6 +94,10 @@ class GSVenueDetail: UIViewController {
 		self.performSegueWithIdentifier("ShowVideoSegue", sender: videoId)
 	}
 	
+	func showWebViewWithUrl(url: String) {
+		self.performSegueWithIdentifier("ShowWebSegue", sender: url)
+	}
+	
 	// MARK: - Segue Navigation
 
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -115,6 +119,9 @@ class GSVenueDetail: UIViewController {
 			let nav = segue.destinationViewController as! UINavigationController
 			let vc = nav.topViewController as! GSShowVideo
 			vc.videoId = (sender as! String)
+		} else if segue.identifier == "ShowWebSegue" {
+			let vc = segue.destinationViewController as! GSShowWeb
+			vc.urlString = (sender as! String)
 		}
 	}
 }

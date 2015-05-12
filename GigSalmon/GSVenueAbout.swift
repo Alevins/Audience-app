@@ -100,4 +100,11 @@ class GSVenueAbout: UIViewController {
 			}
 		}
 	}
+	
+	@IBAction func showWebSiteAction(sender: AnyObject) {
+		let siteUrl = venue!["siteUrl"] as? String
+		if siteUrl != nil {
+			(delegate as! GSVenueDetail).showWebViewWithUrl(siteUrl!)
+		}
+	}
 }
