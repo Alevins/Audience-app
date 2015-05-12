@@ -264,7 +264,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			eventsQuery.whereKey("category", equalTo:self.category!)
 		}
 		if count(self.keyword) > 0 {
-			eventsQuery.whereKey("title", hasPrefix:self.keyword!)
+			eventsQuery.whereKey("title", containsString:self.keyword!)
 		}
 		eventsQuery.whereKey("venue", matchesQuery: venuesQuery)
 		eventsQuery.includeKey("venue")
