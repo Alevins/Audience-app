@@ -32,16 +32,11 @@ class GSEventDetail: UIViewController {
 		let venue = self.event!["venue"] as! PFObject
 		venueNameLabel.text = "@" + (venue["name"] as! String)
 		eventDescriptionLabel.text = self.event!["description"] as? String
-		
-		let geocoder = CLGeocoder()
-		let venueLocation = venue["location"] as! PFGeoPoint
-		let location = CLLocation(latitude: venueLocation.latitude, longitude: venueLocation.longitude)
-		geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
-			if placemarks.count > 0 {
-				let placemark = placemarks[0] as! CLPlacemark
-				self.venueAddressLabel.text = placemark.name
-			}
-		})
+
+		let addressString = venue["address_ja"] as? String
+		if addressString != nil {
+			venueAddressLabel.text = addressString!
+		}
 		
 		let imageFile = self.event!["image"] as! PFFile
 		imageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
