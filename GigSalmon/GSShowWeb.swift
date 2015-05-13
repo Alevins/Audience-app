@@ -42,7 +42,8 @@ class GSShowWeb: UIViewController {
 	func buttonAction(sender: UIBarButtonItem) {
 		if urlString != nil {
 			let url = NSURL(string: urlString!)
-			let vc = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
+			let activity = SafariActivity()
+			let vc = UIActivityViewController(activityItems: [url!], applicationActivities: [activity])
 			self.presentViewController(vc, animated: true, completion: nil)
 		}
 	}

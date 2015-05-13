@@ -27,6 +27,12 @@
 		9AB3CD9E1AD559F90082D2AB /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB3CD9C1AD559F90082D2AB /* Fabric.framework */; };
 		9AD82E111AEDF4AC0022BC77 /* GSMenuSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD82E101AEDF4AC0022BC77 /* GSMenuSettings.swift */; };
 		9AD82E131AEDFA1F0022BC77 /* GSSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD82E121AEDFA1F0022BC77 /* GSSelectionMenu.swift */; };
+		9AE9EEFA1B037FA300B894B3 /* safari.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AE9EEF51B037FA300B894B3 /* safari.png */; };
+		9AE9EEFB1B037FA300B894B3 /* safari@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AE9EEF61B037FA300B894B3 /* safari@2x.png */; };
+		9AE9EEFC1B037FA300B894B3 /* safari@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AE9EEF71B037FA300B894B3 /* safari@3x.png */; };
+		9AE9EEFD1B037FA300B894B3 /* safari~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AE9EEF81B037FA300B894B3 /* safari~iPad.png */; };
+		9AE9EEFE1B037FA300B894B3 /* safari~iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AE9EEF91B037FA300B894B3 /* safari~iPad@2x.png */; };
+		9AE9EF001B037FAF00B894B3 /* SafariActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9EEFF1B037FAF00B894B3 /* SafariActivity.swift */; };
 		9AF2BB101AE0D3B0007BE97A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF2BB0E1AE0D3B0007BE97A /* Bolts.framework */; };
 		9AF2BB111AE0D3B0007BE97A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF2BB0F1AE0D3B0007BE97A /* Parse.framework */; };
 		9AF2BB131AE0D3FB007BE97A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF2BB121AE0D3FB007BE97A /* AudioToolbox.framework */; };
@@ -87,6 +93,12 @@
 		9AB3CD9C1AD559F90082D2AB /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		9AD82E101AEDF4AC0022BC77 /* GSMenuSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMenuSettings.swift; sourceTree = "<group>"; };
 		9AD82E121AEDFA1F0022BC77 /* GSSelectionMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSSelectionMenu.swift; sourceTree = "<group>"; };
+		9AE9EEF51B037FA300B894B3 /* safari.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = safari.png; sourceTree = "<group>"; };
+		9AE9EEF61B037FA300B894B3 /* safari@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "safari@2x.png"; sourceTree = "<group>"; };
+		9AE9EEF71B037FA300B894B3 /* safari@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "safari@3x.png"; sourceTree = "<group>"; };
+		9AE9EEF81B037FA300B894B3 /* safari~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "safari~iPad.png"; sourceTree = "<group>"; };
+		9AE9EEF91B037FA300B894B3 /* safari~iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "safari~iPad@2x.png"; sourceTree = "<group>"; };
+		9AE9EEFF1B037FAF00B894B3 /* SafariActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariActivity.swift; sourceTree = "<group>"; };
 		9AF2BB0E1AE0D3B0007BE97A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9AF2BB0F1AE0D3B0007BE97A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9AF2BB121AE0D3FB007BE97A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -164,10 +176,32 @@
 			path = GoogleMaterialDesignIcons;
 			sourceTree = "<group>";
 		};
+		9AE9EEF31B037F7B00B894B3 /* SafariActivity */ = {
+			isa = PBXGroup;
+			children = (
+				9AE9EEF41B037FA300B894B3 /* Images */,
+				9AE9EEFF1B037FAF00B894B3 /* SafariActivity.swift */,
+			);
+			name = SafariActivity;
+			sourceTree = "<group>";
+		};
+		9AE9EEF41B037FA300B894B3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9AE9EEF51B037FA300B894B3 /* safari.png */,
+				9AE9EEF61B037FA300B894B3 /* safari@2x.png */,
+				9AE9EEF71B037FA300B894B3 /* safari@3x.png */,
+				9AE9EEF81B037FA300B894B3 /* safari~iPad.png */,
+				9AE9EEF91B037FA300B894B3 /* safari~iPad@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		9AF5A6EA1AD39AA200CEC57F = {
 			isa = PBXGroup;
 			children = (
 				9AB3CD951AD4F9700082D2AB /* GoogleMaterialDesignIcons */,
+				9AE9EEF31B037F7B00B894B3 /* SafariActivity */,
 				9AF5A6F51AD39AA200CEC57F /* GigSalmon */,
 				9AF5A70D1AD39AA200CEC57F /* GigSalmonTests */,
 				9AF5A6F41AD39AA200CEC57F /* Products */,
@@ -362,9 +396,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AE9EEFA1B037FA300B894B3 /* safari.png in Resources */,
 				9AB3CD991AD4F9700082D2AB /* googleicon.ttf in Resources */,
 				9AF5A7001AD39AA200CEC57F /* Main.storyboard in Resources */,
+				9AE9EEFC1B037FA300B894B3 /* safari@3x.png in Resources */,
+				9AE9EEFD1B037FA300B894B3 /* safari~iPad.png in Resources */,
 				9AF5A7051AD39AA200CEC57F /* LaunchScreen.xib in Resources */,
+				9AE9EEFB1B037FA300B894B3 /* safari@2x.png in Resources */,
+				9AE9EEFE1B037FA300B894B3 /* safari~iPad@2x.png in Resources */,
 				9AF5A7021AD39AA200CEC57F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +481,7 @@
 				9A0338801AF5F908000B8009 /* GSVenueAbout.swift in Sources */,
 				9A6AC83D1AE49F99006C1A03 /* GSPinAnnotation.swift in Sources */,
 				9A56BD441AFF7546004E5BAE /* GSShowVideo.swift in Sources */,
+				9AE9EF001B037FAF00B894B3 /* SafariActivity.swift in Sources */,
 				9AD82E111AEDF4AC0022BC77 /* GSMenuSettings.swift in Sources */,
 				9AB3CD981AD4F9700082D2AB /* GoogleIcon.swift in Sources */,
 				9A6AC83F1AE4A438006C1A03 /* GSPinAnnotationView.swift in Sources */,
