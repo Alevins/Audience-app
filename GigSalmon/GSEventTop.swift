@@ -261,12 +261,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		var eventsQuery = PFQuery(className: "Events")
 		eventsQuery.whereKey("date", greaterThanOrEqualTo: fromDate!)
 		eventsQuery.whereKey("date", lessThan: toDate)
-		if count(self.category) > 0 {
-			eventsQuery.whereKey("category", equalTo:self.category!)
-		}
-		if count(self.keyword) > 0 {
-			eventsQuery.whereKey("title", containsString:self.keyword!)
-		}
 		eventsQuery.whereKey("venue", matchesQuery: venuesQuery)
 		eventsQuery.includeKey("venue")
 		eventsQuery.findObjectsInBackgroundWithBlock( { (NSArray objects, NSError error) in
@@ -274,7 +268,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 				println("query failed")
 			} else {
 				self.events = objects as! [PFObject]
-				self.composeAndDisplayEvents(self.events)
+				self.applyFilter()
 			}
 			self.collectionView.reloadData()
 		})
@@ -393,7 +387,6 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.keyword = ""
 		self.category = ""
 		self.toggleFilterBar()
-//		self.refreshDataSource()
 		self.applyFilter()
 	}
 	
