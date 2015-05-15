@@ -35,6 +35,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	var isRegionChanged: Bool = false
 	var allCategories: [String] = []
 	var eventsInCategories = [String: [PFObject]]()
+	var events: [PFObject] = []
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -239,7 +240,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		return distance
 	}
 
-	// MARK: - Database
+	// MARK: - DataSource Handling
 	
 	func refreshDataSource() {
 		if (!self.isRegionChanged) {
@@ -272,55 +273,77 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			if error != nil {
 				println("query failed")
 			} else {
-				if let events = objects as? [PFObject] {
-					// removal
-					for category in self.allCategories {
-						let oldEvents = self.eventsInCategories[category]! as [PFObject]
-						for var i = 0; i < oldEvents.count; i++ {
-							var j = 0
-							for ; j < events.count; j++ {
-								if (oldEvents[i]["identifier"] as! String) == (events[j]["identifier"] as! String) {
-									break
-								}
-							}
-							if j == events.count {
-								self.eventsInCategories[category]!.removeAtIndex(i)
-								for annon in self.mapView.annotations {
-									if annon is MKUserLocation {
-										continue
-									}
-									let e: PFObject = (annon as! GSPinAnnotation).event!
-									if (e["identifier"] as! String) == (oldEvents[i]["identifier"] as! String) {
-										self.mapView.removeAnnotation(annon as! GSPinAnnotation)
-										break
-									}
-								}
-							}
-						}
+				self.events = objects as! [PFObject]
+				self.composeAndDisplayEvents(self.events)
+			}
+			self.collectionView.reloadData()
+		})
+	}
+	
+	func applyFilter() {
+		var events = NSMutableArray(array: self.events)
+		var predArray = NSMutableArray()
+		let filteredEvents: [PFObject]
+		if count(self.keyword) > 0 {
+			predArray.addObject(NSPredicate(format: "title contains[c] %@ OR description contains[c] %@", self.keyword, self.keyword))
+		}
+		if count(self.category) > 0 {
+			predArray.addObject(NSPredicate(format: "category like[c] %@", self.category))
+		}
+		if predArray.count > 0 {
+			let predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: predArray as [AnyObject])
+			filteredEvents = events.filteredArrayUsingPredicate(predicate) as! [PFObject]
+		} else {
+			filteredEvents = self.events
+		}
+		self.composeAndDisplayEvents(filteredEvents)
+	}
+	
+	func composeAndDisplayEvents(events: [PFObject]) {
+		// removal
+		for category in self.allCategories {
+			let oldEvents = self.eventsInCategories[category]! as [PFObject]
+			for var i = 0; i < oldEvents.count; i++ {
+				var j = 0
+				for ; j < events.count; j++ {
+					if (oldEvents[i]["identifier"] as! String) == (events[j]["identifier"] as! String) {
+						break
 					}
-					// append
-					for event in events {
-						let category = event["category"] as! String
-						if find(self.allCategories, category) == nil {
+				}
+				if j == events.count {
+					self.eventsInCategories[category]!.removeAtIndex(i)
+					for annon in self.mapView.annotations {
+						if annon is MKUserLocation {
 							continue
 						}
-						let oldEvents = self.eventsInCategories[category]! as [PFObject]
-						var i = 0
-						for ; i < oldEvents.count; i++ {
-							if (oldEvents[i]["identifier"] as! String) == (event["identifier"] as! String) {
-								break
-							}
-						}
-						if i == oldEvents.count {
-							self.eventsInCategories[category]!.append(event)
-							let pin: GSPinAnnotation = GSPinAnnotation(event: event)
-							self.mapView.addAnnotation(pin)
+						let e: PFObject = (annon as! GSPinAnnotation).event!
+						if (e["identifier"] as! String) == (oldEvents[i]["identifier"] as! String) {
+							self.mapView.removeAnnotation(annon as! GSPinAnnotation)
+							break
 						}
 					}
 				}
 			}
-			self.collectionView.reloadData()
-		})
+		}
+		// append
+		for event in events {
+			let category = event["category"] as! String
+			if find(self.allCategories, category) == nil {
+				continue
+			}
+			let oldEvents = self.eventsInCategories[category]! as [PFObject]
+			var i = 0
+			for ; i < oldEvents.count; i++ {
+				if (oldEvents[i]["identifier"] as! String) == (event["identifier"] as! String) {
+					break
+				}
+			}
+			if i == oldEvents.count {
+				self.eventsInCategories[category]!.append(event as PFObject)
+				let pin: GSPinAnnotation = GSPinAnnotation(event: event as PFObject)
+				self.mapView.addAnnotation(pin)
+			}
+		}
 	}
 	
 	// MARK: - Action
@@ -369,7 +392,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.keyword = ""
 		self.category = ""
 		self.toggleFilterBar()
-		self.refreshDataSource()
+//		self.refreshDataSource()
+		self.applyFilter()
 	}
 	
 	func dateButtonAction(sender: UIButton) {
@@ -424,7 +448,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		}
 		self.category = category
 		self.toggleFilterBar()
-		self.refreshDataSource()
+//		self.refreshDataSource()
+		self.applyFilter()
 	}
 	
 	func showEventDetailView() {
