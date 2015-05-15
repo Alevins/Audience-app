@@ -297,6 +297,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			filteredEvents = self.events
 		}
 		self.composeAndDisplayEvents(filteredEvents)
+		self.collectionView.reloadData()
 	}
 	
 	func composeAndDisplayEvents(events: [PFObject]) {
