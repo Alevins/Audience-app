@@ -21,7 +21,7 @@ class GSFilterPanel: UITableViewController {
 		super.viewDidLoad()
 		
 		let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		self.categories = appDelegate.eventCategories
+		self.categories = ["no selection"] + appDelegate.eventCategories
 
 		let doneButton = UIButton(frame: CGRectMake(0, 0, 28, 28))
 		doneButton.titleLabel?.font = UIFont(name: GoogleIconName, size: 28.0)
@@ -43,7 +43,10 @@ class GSFilterPanel: UITableViewController {
 			self.textField.text = self.keyword!
 		}
 		if self.category != nil && count(self.category!) > 0 {
-			let index = find(categories, self.category!)
+			var index = find(categories, self.category!)
+			if index == nil {
+				index = 0
+			}
 			self.pickerView.selectRow(index!, inComponent: 0, animated: false)
 		}
 	}
@@ -56,9 +59,15 @@ class GSFilterPanel: UITableViewController {
 	
 	func doneAction(sender: UIBarButtonItem) {
 		let delegate = self.delegate as? GSEventTop
-		if ((delegate?.respondsToSelector("filterAction:")) != nil) {
-			delegate!.filterWithKeyword(self.textField.text, andCategory: categories[self.pickerView.selectedRowInComponent(0)] as String)
-		}
+//		if ((delegate?.respondsToSelector("filterAction:")) != nil) {
+//		if ((delegate?.respondsToSelector("filterAction:andCategory:")) != nil) {
+			let selectedIndex = self.pickerView.selectedRowInComponent(0) as Int
+			var category: String = ""
+			if selectedIndex != 0 {
+				category = categories[selectedIndex]
+			}
+			delegate?.filterWithKeyword(self.textField.text, andCategory: category)
+//		}
 		self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
 	}
 	

@@ -441,15 +441,22 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.filterLabel!.layer.addAnimation(transition, forKey: nil)
 		self.filterLabel!.text = nil
 		if count(keyword) > 0 {
-			self.filterLabel!.text = "\(keyword) & \(category)"
 			self.keyword = keyword
+			self.filterLabel!.text = "\(keyword)"
 		} else {
-			self.filterLabel!.text = "\(category)"
 			self.keyword = ""
 		}
-		self.category = category
+		if count(category) > 0 {
+			self.category = category
+			if count(self.keyword) > 0 {
+				self.filterLabel!.text = "\(keyword) & \(category)"
+			} else {
+				self.filterLabel!.text = "\(category)"
+			}
+		} else {
+			self.category = ""
+		}
 		self.toggleFilterBar()
-//		self.refreshDataSource()
 		self.applyFilter()
 	}
 	
