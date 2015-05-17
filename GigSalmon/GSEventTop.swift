@@ -304,7 +304,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		// removal
 		for category in self.allCategories {
 			let oldEvents = self.eventsInCategories[category]! as [PFObject]
-			for var i = 0; i < oldEvents.count; i++ {
+			for var i = oldEvents.count - 1; i >= 0; i-- {
 				var j = 0
 				for ; j < events.count; j++ {
 					if (oldEvents[i]["identifier"] as! String) == (events[j]["identifier"] as! String) {
