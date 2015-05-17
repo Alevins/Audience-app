@@ -14,12 +14,13 @@ import Parse
 class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var eventGlanceContainer: UIView!
 	var currentLocationButton: UIButton?
 	var eventGlance: GSEventGlance?
 	var distanceLabel: UILabel?
 	var locationManager = CLLocationManager()
-	var isCollectionView: Bool = false
+	var isListView: Bool = false
 	var keyword: String! = ""
 	var category: String! = ""
 	var currentDate: NSDate! = NSDate()
@@ -36,6 +37,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 	var allCategories: [String] = []
 	var eventsInCategories = [String: [PFObject]]()
 	var events: [PFObject] = []
+	var selectedEvent: PFObject?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -102,7 +104,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 
 		self.currentLocationButton!.frame = CGRectMake(screenBounds.size.width - 32 - 12, screenBounds.size.height - tabBarHeight - dateBarHeight - 32 - 12, 32, 32)
 
-		self.collectionView.contentInset = UIEdgeInsetsMake(self.navBarHeight + filterBarHeight, 0, self.tabBarHeight + dateBarHeight, 0)
+//		self.collectionView.contentInset = UIEdgeInsetsMake(self.navBarHeight + filterBarHeight, 0, self.tabBarHeight + dateBarHeight, 0)
+		self.tableView.contentInset = UIEdgeInsetsMake(self.navBarHeight + filterBarHeight, 0, self.tabBarHeight + dateBarHeight, 0)
 	}
 	
 	func onOrientationChange(notification: NSNotification) {
@@ -219,7 +222,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		frame.size.height = count(keyword) > 0 || count(category) > 0 ? 36 : 0
 		UIView.animateWithDuration(0.25, animations: { () -> Void in
 			self.filterBarView!.frame = frame
-			self.collectionView.contentInset = UIEdgeInsetsMake(self.navBarHeight + frame.size.height, 0, self.tabBarHeight + 36, 0)
+//			self.collectionView.contentInset = UIEdgeInsetsMake(self.navBarHeight + frame.size.height, 0, self.tabBarHeight + 36, 0)
+			self.tableView.contentInset = UIEdgeInsetsMake(self.navBarHeight + frame.size.height, 0, self.tabBarHeight + 36, 0)
 		})
 	}
 	
@@ -270,7 +274,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 				self.events = objects as! [PFObject]
 				self.applyFilter()
 			}
-			self.collectionView.reloadData()
+//			self.collectionView.reloadData()
+			self.tableView.reloadData()
 		})
 	}
 	
@@ -291,7 +296,8 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			filteredEvents = self.events
 		}
 		self.composeAndDisplayEvents(filteredEvents)
-		self.collectionView.reloadData()
+//		self.collectionView.reloadData()
+		self.tableView.reloadData()
 	}
 	
 	func composeAndDisplayEvents(events: [PFObject]) {
@@ -368,7 +374,7 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		UIView.animateWithDuration(0.4, animations: { () -> Void in
 			var transition: UIViewAnimationTransition
 			var listViewHidden: Bool
-			if (self.isCollectionView) {
+			if (self.isListView) {
 				transition = .FlipFromLeft
 				listViewHidden = true
 				sender.setTitle(GoogleIcon.e683, forState: UIControlState.Normal)
@@ -378,8 +384,9 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 				sender.setTitle(GoogleIcon.e6be, forState: UIControlState.Normal)
 			}
 			UIView.setAnimationTransition(transition, forView: self.view, cache: true)
-			self.collectionView?.hidden = listViewHidden
-			self.isCollectionView = !self.isCollectionView
+//			self.collectionView?.hidden = listViewHidden
+			self.tableView?.hidden = listViewHidden
+			self.isListView = !self.isListView
 		})
 	}
 	
@@ -419,6 +426,23 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			region.span.longitudeDelta = 0.1
 		}
 		self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
+	}
+	
+	func cellTapAction(sender: UIButton) {
+		self.selectedEvent = nil
+		let index = Int(sender.frame.origin.x / 108)
+		var section = 0
+		for category in allCategories {
+			if eventsInCategories[category]!.count > 0 {
+				if section == sender.tag {
+					let arr: Array = self.eventsInCategories[category]!
+					self.selectedEvent = arr[index]
+					break
+				}
+				section++
+			}
+		}
+		self.performSegueWithIdentifier("ShowEventDetailSegue", sender: self)
 	}
 	
 	// MARK: - Delegate methods
@@ -563,6 +587,91 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 		self.showEventDetailView()
 	}
 	
+	// MARK: - UITableViewDataSource
+
+	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+		var sections = 0
+		for category in allCategories {
+			if eventsInCategories[category]!.count > 0 {
+				sections++
+			}
+		}
+
+		return sections
+	}
+	
+	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 1
+	}
+
+	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+		self.updateCell(cell, atIndexPath: indexPath)
+		
+		return cell;
+	}
+	
+	func updateCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+		let scrollView = cell.contentView.viewWithTag(1) as! UIScrollView
+		for view in scrollView.subviews {
+			view.removeFromSuperview()
+		}
+		let category = allCategories[indexPath.section]
+		let arr: Array = self.eventsInCategories[category]!
+		for var i = 0; i < arr.count; i++ {
+			let imageView = UIImageView(frame: CGRectMake(108.0 * CGFloat(i), 8.0, 100.0, 100.0))
+			imageView.contentMode = .ScaleAspectFill
+			imageView.clipsToBounds = true
+			scrollView.addSubview(imageView)
+			let event: PFObject = arr[i] as PFObject
+			let imageFile = event["image"] as! PFFile
+			imageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+				if error == nil {
+					if let imageData = imageData {
+						imageView.image = UIImage(data:imageData)
+					}
+				}
+			}
+			
+			let labelBase = UIView(frame: CGRectMake(108.0 * CGFloat(i), 108.0 - 32.0, 100.0, 32.0))
+			labelBase.backgroundColor = UIColor.blackColor()
+			labelBase.alpha = 0.3
+			scrollView.addSubview(labelBase)
+			
+			let titleLabel = UILabel(frame: CGRectMake(108.0 * CGFloat(i) + 8, 76.0, 84.0, 16.0))
+			titleLabel.backgroundColor = UIColor.clearColor()
+			titleLabel.font = UIFont.systemFontOfSize(12)
+			titleLabel.textColor = UIColor.whiteColor()
+			scrollView.addSubview(titleLabel)
+			titleLabel.text = event["title"] as? String
+			
+			let venueLabel = UILabel(frame: CGRectMake(108.0 * CGFloat(i) + 8, 92.0, 84.0, 16.0))
+			venueLabel.textAlignment = .Right
+			venueLabel.backgroundColor = UIColor.clearColor()
+			venueLabel.font = UIFont.systemFontOfSize(12)
+			venueLabel.textColor = UIColor.whiteColor()
+			scrollView.addSubview(venueLabel)
+			let venue = event["venue"] as! PFObject
+			venueLabel.text = "@" + (venue["name"] as! String)
+			
+			let button = UIButton(frame: CGRectMake(108.0 * CGFloat(i), 8.0, 100.0, 100.0))
+			button.tag = indexPath.section
+			button.showsTouchWhenHighlighted = true
+			button.addTarget(self, action: "cellTapAction:", forControlEvents: .TouchUpInside)
+			scrollView.addSubview(button)
+			
+			scrollView.contentSize = CGSizeMake(CGRectGetMaxX(imageView.frame), scrollView.frame.size.height)
+		}
+	}
+
+	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return allCategories[section]
+	}
+	
+	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return 116
+	}
+	
 	// MARK: - CLLocationManagerDelegate
 
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -599,13 +708,17 @@ class GSEventTop: UIViewController, CLLocationManagerDelegate {
 			self.eventGlance!.delegate = self
 		} else if segue.identifier == "ShowEventDetailSegue" {
 			let detailView = segue.destinationViewController as! GSEventDetail
-			if isCollectionView {
-				let indexPaths = self.collectionView.indexPathsForSelectedItems()
+			if isListView {
+/*				let indexPaths = self.collectionView.indexPathsForSelectedItems()
 				let indexPath = indexPaths[0] as! NSIndexPath
 				let category: String = self.allCategories[indexPath.section] as String
 				let arr: Array = self.eventsInCategories[category]!
 				let event: PFObject = arr[indexPath.item] as PFObject
 				detailView.event = event
+*/
+				if self.selectedEvent != nil {
+					detailView.event = self.selectedEvent
+				}
 			} else {
 				let annotations = self.mapView!.selectedAnnotations
 				let pin = annotations[0] as! GSPinAnnotation
