@@ -1,0 +1,24 @@
+PODS:
+  - ActionSheetPicker-3.0 (1.5.1)
+  - MZAppearance (1.1.5)
+  - MZFormSheetController (3.0.5):
+    - MZAppearance
+    - MZFormSheetController/Core (= 3.0.5)
+  - MZFormSheetController/Core (3.0.5):
+    - MZAppearance
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
+
+DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 1.5.1)
+  - MZFormSheetController (~> 3.0.0)
+  - SDWebImage (~> 3.7)
+
+SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: de0f71e30495ed0192f7d16d0fddcab6882a0ca3
+  MZAppearance: 6e9dc64e42074c0a19812a327f590746c3283bab
+  MZFormSheetController: 4b351d487e6abaf2d208eba04581723a5b73c4de
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+
+COCOAPODS: 0.38.2
